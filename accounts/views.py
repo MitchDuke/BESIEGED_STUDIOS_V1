@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
-def accounts(request):
-    return render(request, 'accounts/accounts.html')
+def login_view(request):
+    return render(request, 'accounts/login.html')
 
 
-def accounts_detail(request, id):
-    return render(request, 'accounts/accounts_detail.html', {'id': id})
+def logout_view(request):
+    return redirect('home')  # Placeholder, logout logic to be added.
+
+
+def register_view(request):
+    return render(request, 'accounts/register.html')
