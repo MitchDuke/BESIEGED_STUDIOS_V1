@@ -10,3 +10,4 @@ class Project(models.Model):
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='gallery/images/')
+    is_featured = models.BooleanField(default=False)
