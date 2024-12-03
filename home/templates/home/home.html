@@ -1,8 +1,34 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - Miniature Commissions{% endblock %}
+{% block title %}Besiged Studios - Miniature Commissions{% endblock %}
 
 {% block content %}
-<h1>Welcome to Our Miniature Painting Commission Site!</h1>
-<p>Explore our gallery and commission your custom-painted miniatures today!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Welcome to Besieged Studios!</h1>
+            <p>Your destination for beautifully painted miniature figures and scenes!</p>
+            <div class="features">
+                <h2>Explore our services</h2>
+                <ul>
+                    <li>Custom Miniature Painting</li>
+                    <li>Extensive Gallery</li>
+                    <li>Commission a Unique Piece</li>
+                    <li>Custom Miniature Conversions</li>
+                    <li>Custom Terrain Building</li>
+                    <li>Custom Diorama Building</li>
+                </ul>
+            </div>
+            <div class="image-button">
+                <a href="{% url 'gallery' %}" class="btn btn-primary">View Gallery</a>
+                <img src="" alt="gallery Image" class="img-thumbnail">
+                <p>Click the button to view our gallery of completed projects!</p>
+            </div>
+            <div class="image-button">
+                <a href="{% url 'commissions' %}" class="btn btn-primary">View Gallery</a>
+                <img src="" alt="commissions Image" class="img-thumbnail">
+                <p>Click here to commission a piece today!</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

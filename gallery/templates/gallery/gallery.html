@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Besiged Studios - Gallery{% endblock %}
+
+{% block content %}
+<div class="gallery-container">
+    <h1>Our Miniature Collection</h1>
+    <div class="project-list">
+        {% for project in projects %}
+            <div class="project-card">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.category.name }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
