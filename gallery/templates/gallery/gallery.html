@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Besiged Studios - Gallery{% endblock %}
+{% block title %}Besieged Studios - Gallery{% endblock %}
 
 {% block content %}
 <div class="gallery-container">
@@ -9,9 +9,13 @@
     <div class="project-list">
         {% for project in projects %}
             <div class="project-card">
-                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                <img class="project-card img" src="{{ project.image.url }}" alt="{{ project.title }}">
                 <h3>{{ project.title }}</h3>
-                <p>{{ project.category.name }}</p>
+                <p>Categories:
+                    {% for category in project.category.all %}
+                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
             </div>
         {% endfor %}
     </div>

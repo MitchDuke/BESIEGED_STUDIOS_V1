@@ -4,7 +4,7 @@ from .models import Project
 
 def gallery(request):
     projects = Project.objects.all()
-    return render(request, 'gallery/gallery.html')
+    return render(request, 'gallery/gallery.html', {'projects': projects})
 
 
 def gallery_detail(request, id):
