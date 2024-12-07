@@ -19,16 +19,19 @@
                     <li>Custom Diorama Building</li>
                 </ul>
             </div>
-            <div class="image-button">
-                <a href="{% url 'gallery' %}" class="btn btn-primary">View Gallery</a>
-                <img src="" alt="gallery Image" class="img-thumbnail">
-                <p>Click the button to view our gallery of completed projects!</p>
-            </div>
-            <div class="image-button">
-                <a href="{% url 'commissions' %}" class="btn btn-primary">View Gallery</a>
-                <img src="" alt="commissions Image" class="img-thumbnail">
-                <p>Click here to commission a piece today!</p>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <a href="{% url 'gallery' %}" class="btn btn-primary mb-3">View Gallery</a>
+                    <img src="" alt="gallery Image" class="img-fluid img-thumbnail">
+                    <p>Click the button to view our gallery of completed projects!</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <a href="{% url 'commissions' %}" class="btn btn-primary mb-3">Commission a Piece</a>
+                    <img src="" alt="commissions Image" class="img-fluid img-thumbnail">
+                    <p>Click here to commission a piece today!</p>
+                </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
