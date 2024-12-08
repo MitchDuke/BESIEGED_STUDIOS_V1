@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Project
 
 
@@ -8,4 +8,5 @@ def gallery(request):
 
 
 def gallery_detail(request, id):
-    return render(request, 'gallery/gallery_detail.html', {'id': id})
+    project = get_object_or_404(Project, id=id)
+    return render(request, 'gallery/gallery_detail.html', {'project': project})
