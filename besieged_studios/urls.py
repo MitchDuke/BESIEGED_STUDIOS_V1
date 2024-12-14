@@ -27,7 +27,7 @@ urlpatterns = [
     path('basket/', include('basket.urls')),
     path('commissions/', include('commissions.urls')),
     path('dashboard/', include('dashboard.urls')),
-    path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    path('accounts/', include('allauth.urls')),
 
 ]
 
