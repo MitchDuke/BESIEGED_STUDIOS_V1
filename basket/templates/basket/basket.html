@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Basket{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1>Your Basket</h1>
+    {% if basket_items %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in basket_items %}
+                <tr>
+                    <td>{{ item.project.title }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>£{{ item.project.price|floatformat:2 }}</td>
+                    <td>£{{ item.total_price|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Your basket is empty.</p>
+    {% endif %}
+</div>
+{% endblock %}
