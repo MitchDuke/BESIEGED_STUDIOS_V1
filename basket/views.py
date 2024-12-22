@@ -8,7 +8,7 @@ def basket_view(request):
     basket_items = []
     for pk, quantity in basket.items():
         try:
-            project = Project.objects.get(pk=pk)
+            project = Project.objects.get(pk=int(pk))
             basket_items.append({
                 "project": project,
                 "quantity": quantity,
@@ -27,4 +27,18 @@ def add_to_basket(request, pk):
         basket[pk] = 1
     request.session["basket"] = basket
     messages.success(request, "Item added to basket.")
+    return redirect("basket:basket_view")
+
+
+def update_basket(request, pk, action):
+    basket = request.session.get("basket", {})
+    pk = str(pk)
+    if pk in basket:
+        if action == "add":
+            basket[pk] += 1
+        elif action == "reduce":
+            basket[pk] = max(1, basket[pk] - 1)
+        elif action == "remove":
+            del basket[pk]
+    request.session["basket"] = basket
     return redirect("basket:basket_view")
