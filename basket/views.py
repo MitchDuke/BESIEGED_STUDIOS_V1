@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from gallery.models import Project
+from django.http import JsonResponse
 
 
 def basket_view(request):
@@ -16,6 +17,10 @@ def basket_view(request):
             })
         except Project.DoesNotExist:
             continue
+
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return render(request, "basket/_basket_preview.html", {"basket_items": basket_items})
+
     return render(request, "basket/basket.html", {"basket": basket, "basket_items": basket_items})
 
 
@@ -26,8 +31,16 @@ def add_to_basket(request, pk):
     else:
         basket[pk] = 1
     request.session["basket"] = basket
+
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        project = Project.objects.get(pk=pk)
+        return JsonResponse({
+            "message": f"Added {project.title} to your basket.",
+            "basket_count": sum(basket.values())
+        })
+
     messages.success(request, "Item added to basket.")
-    return redirect("basket:basket_view")
+    return redirect("gallery:gallery")
 
 
 def update_basket(request, pk, action):
