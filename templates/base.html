@@ -23,15 +23,22 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'gallery:gallery' %}">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'commissions' %}">Commissions</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}">Login</a></li>
+                    <!--
                     <li class="nav-item"><a class="nav-link" href="{% url 'basket:basket_view' %}">Basket</a></li>
+                    -->
                 </ul>
             </div>
             <div id="basket-preview" class="dropdown">
-                <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="basketDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Basket (<span id="basket-count">0</span>)
                 </button>
-                <div class="dropdown-menu p-3" id="basket-content">
-                    <p>Your basket is empty.</p>
+                <div class="dropdown-menu p-3" aria-labelledby="basketDropdown">
+                    <div id="basket-content">
+                        <p>Your basket is empty.</p>
+                    </div>
+                    <div class="mt-2">
+                        <a href="{% url 'basket:basket_view' %}" class="btn btn-primary btn-sm w-100">Go to Basket</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,16 +50,22 @@
         {% endblock %}
     </div>
 
-    <!-- Toasts -->
-     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="basket-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-body"></div>
-        </div>
-     </div>
+    <!-- Toast notifications -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        {% for message in messages %}
+            {% include "toasts/toast_"|add:message.tags|stringformat:"s"|add:".html" with message=message %}
+        {% endfor %}
+    </div>
 
-{% block scripts %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-{% endblock %}
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     {% block postloadjs %}
+     <script class="text/javascript">
+         document.addEventListener("DOMContentLoaded", function () {
+             document.querySelectorAll('.toast').forEach(toastElement => {
+                 new bootstrap.Toast(toastElement).show();
+             });
+         });
+     </script>
+     {% endblock %}
 </body>
 </html>

@@ -1,27 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Toast element
-    const toast = document.getElementById("basket-toast");
-    const toastBody = toast.querySelector(".toast-body");
-
-    // Function to update basket count and preview
+    // Function to update basket preview
     const updateBasketPreview = () => {
-        fetch("/basket/")
+        fetch("/basket/", { headers: { "X-Requested-With": "XMLHttpRequest" } })
             .then((response) => response.text())
             .then((html) => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, "text/html");
-                const basketPreview = doc.querySelector("#basket-content").innerHTML;
-                document.getElementById("basket-content").innerHTML = basketPreview;
-                document.getElementById("basket-count").innerText = doc.querySelector("#basket-count").innerText;
+                document.getElementById("basket-content").innerHTML = html;
             });
     };
 
-    // AJAX handler for "Add to Basket"
-    document.querySelectorAll(".add-to-basket").forEach((button) => {
-        button.addEventListener("click", (e) => {
+    // Update basket count when adding items
+    const toast = document.getElementById("basket-toast");
+    const toastBody = toast.querySelector(".toast-body");
+    document.querySelectorAll(".add-to-basket-form").forEach((form) => {
+        form.addEventListener("submit", (e) => {
             e.preventDefault();
-            const url = button.getAttribute("href");
-            fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } })
+
+            const url = form.getAttribute("action");
+            const csrfToken = form.querySelector("input[name=csrfmiddlewaretoken]").value;
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": csrfToken,
+                },
+            })
                 .then((response) => response.json())
                 .then((data) => {
                     toastBody.textContent = data.message;
