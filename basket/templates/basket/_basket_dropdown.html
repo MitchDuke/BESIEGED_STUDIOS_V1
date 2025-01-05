@@ -3,9 +3,14 @@
         {% for item in basket_items %}
             <li class="mb-2 d-flex align-items-center">
                 <img src="{{ item.project.image.url }}" alt="{{ item.project.title }}" class="img-thumbnail me-2" style="width: 50px; height: auto;">
-                <div>
+                <div class="flex-grow-1">
                     <p class="mb-0"><strong>{{ item.project.title }}</strong></p>
                     <p class="mb-0 small">Qty: {{ item.quantity }}</p>
+                    <div class="d-flex">
+                        <a href="{% url 'basket:update' item.project.pk 'add' %}" class="btn btn-sm btn-primary me-1">+</a>
+                        <a href="{% url 'basket:update' item.project.pk 'reduce' %}" class="btn btn-sm btn-warning me-1">-</a>
+                        <a href="{% url 'basket:update' item.project.pk 'remove' %}" class="btn btn-sm btn-danger">Remove</a>
+                    </div>
                 </div>
             </li>
         {% endfor %}
