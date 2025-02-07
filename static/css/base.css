@@ -30,6 +30,26 @@ nav ul li a {
     margin-top: 50px;
 }
 
+/* Navbar Styling */
+
+.navbar {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Basket Drop-down */
+
+#basket-preview .dropdown-menu {
+    min-width: 280px;
+    max-width: 320px;
+}
+
+#basket-preview .btn {
+    white-space: nowrap;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+}
+
 /* Home page Styling */
 
 .features h2 {

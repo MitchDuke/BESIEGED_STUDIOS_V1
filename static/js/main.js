@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const basketPreview = document.getElementById("basket-preview");
     basketPreview?.addEventListener("mouseover", updateBasketPreview);
-});
 
     // Handle adding items to the basket
     const toast = document.getElementById("basket-toast");
@@ -63,7 +62,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Hover to trigger basket preview update
-    const basketPreview = document.getElementById("basket-preview");
-    basketPreview?.addEventListener("mouseover", updateBasketPreview);
+    // Ensure basket dropdown aligns to the right of the button
+    const basketDropdown = document.getElementById("basketDropdown");
+    const basketMenu = document.querySelector("#basket-preview .dropdown-menu");
+
+    basketDropdown.addEventListener("click", () => {
+        setTimeout(() => {
+            const rect = basketDropdown.getBoundingClientRect();
+            basketMenu.style.right = "0px";
+            basketMenu.style.left = "auto";
+        }, 10);
+    });
 });

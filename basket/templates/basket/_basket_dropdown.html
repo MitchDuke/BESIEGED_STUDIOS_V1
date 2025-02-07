@@ -6,7 +6,7 @@
                 <div class="flex-grow-1">
                     <p class="mb-0"><strong>{{ item.project.title }}</strong></p>
                     <p class="mb-0 small">Qty: {{ item.quantity }}</p>
-                    <div class="d-flex">
+                    <div class="d-flex align-items-center">
                         <a href="{% url 'basket:update' item.project.pk 'add' %}" class="btn btn-sm btn-primary me-1">+</a>
                         <a href="{% url 'basket:update' item.project.pk 'reduce' %}" class="btn btn-sm btn-warning me-1">-</a>
                         <a href="{% url 'basket:update' item.project.pk 'remove' %}" class="btn btn-sm btn-danger">Remove</a>

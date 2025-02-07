@@ -32,7 +32,7 @@
                 <button class="btn btn-outline-light dropdown-toggle" type="button" id="basketDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Basket (<span id="basket-count">{{ basket_count }}</span>)
                 </button>
-                <div class="dropdown-menu p-3" aria-labelledby="basketDropdown">
+                <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="basketDropdown">
                     {% if basket_items %}
                         <ul class="list-unstyled mb-0">
                             {% for item in basket_items %}
