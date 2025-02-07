@@ -1,18 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Function to update the basket dropdown and count
     const updateBasketPreview = () => {
-        const basketContent = document.getElementById("basket-content");
-        const basketCount = document.getElementById("basket-count");
-
         fetch("/basket/", { headers: { "X-Requested-With": "XMLHttpRequest" } })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.text();
-            })
+            .then((response) => response.text())
             .then((html) => {
-                basketContent.innerHTML = html; // Update dropdown content
+                const basketContent = document.getElementById("basket-content");
+                const basketCount = document.getElementById("basket-count");
+
+                // Update dropdown content
+                basketContent.innerHTML = html;
 
                 // Update basket count
                 const itemCount = basketContent.querySelectorAll("li").length;
@@ -22,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error updating basket preview:", error);
             });
     };
+
+    const basketPreview = document.getElementById("basket-preview");
+    basketPreview?.addEventListener("mouseover", updateBasketPreview);
+});
 
     // Handle adding items to the basket
     const toast = document.getElementById("basket-toast");
