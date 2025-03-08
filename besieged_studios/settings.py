@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+if os.path.exists("env.py"):
+    import env
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -31,6 +33,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-)v#gd0g7$jji6t#6%q&t!+k!uqe47ud$$u54iac=8s6355-r75"
+
+STRIPE_PUBLIC_KEY = os.environ.get("pk_test_51R0N4iQ7dXkC9JrsFpF9CWGMbuDeBIifylkE83KrjlJ7l0hQQdG2fyD48OkiFBPof4lxk7LybgTIhL72vyApLOc800WrZjOwfx", "")
+STRIPE_SECRET_KEY = os.environ.get("sk_test_51R0N4iQ7dXkC9JrsRgOPe9Ag3k0uTQ27oHgW0ljnT3LEhTQ3N3zdZw4gPyEOvQLgCfFyeiNfPc69qixRvPvvqo2100zj6evQ2l", "")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
