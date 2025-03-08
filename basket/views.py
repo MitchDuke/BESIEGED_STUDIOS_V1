@@ -1,14 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from gallery.models import Project
-from django.http import JsonResponse
 
 
 def basket_view(request):
-    """View to render the basket page or dropdown content dynamically."""
-    # Build basket items from session data
-    basket = request.session.get("basket", {})
+    """Render basket page and update dropdown contents."""
+    basket = request.session.get('basket', {})
     basket_items = []
+
     for pk, quantity in basket.items():
         try:
             project = Project.objects.get(pk=int(pk))
@@ -20,51 +19,30 @@ def basket_view(request):
         except Project.DoesNotExist:
             continue
 
-    # Return dropdown content if AJAX request
-    if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-        return render(request, "basket/_basket_dropdown.html", {"basket_items": basket_items})
-
-    # Otherwise, render the full basket page
     return render(request, "basket/basket.html", {"basket_items": basket_items})
 
 
-def add_to_basket(request, pk):
-    """View to add items to the basket."""
+def adjust_basket(request, pk):
+    """Update item quantity in the basket."""
+    project = get_object_or_404(Project, pk=pk)
+    quantity = int(request.POST.get("quantity", 1))
     basket = request.session.get("basket", {})
-    pk = str(pk)
-    if pk in basket:
-        basket[pk] += 1
+
+    if quantity > 0:
+        basket[str(pk)] = quantity
+        messages.success(request, f"Updated {project.title} quantity to {quantity}")
     else:
-        basket[pk] = 1
+        basket.pop(str(pk), None)
+        messages.success(request, f"Removed {project.title} from your basket")
+
     request.session["basket"] = basket
-
-    # Get the project and send success message
-    project = Project.objects.get(pk=pk)
-    messages.success(request, f"Added {project.title} to your basket")
-
-    # Return AJAX response if applicable
-    if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-        return JsonResponse({
-            "message": f"Added {project.title} to your basket",
-            "basket_count": sum(basket.values()),
-        })
-
-    # Redirect to gallery by default
-    return redirect("gallery:gallery")
+    return redirect(request.META.get("HTTP_REFERER", "basket:basket_view"))
 
 
-def update_basket(request, pk, action):
-    """View to handle updates to basket items (add, reduce, remove)."""
+def remove_from_basket(request, pk):
+    """Remove an item from the basket."""
     basket = request.session.get("basket", {})
-    pk = str(pk)
-    if pk in basket:
-        if action == "add":
-            basket[pk] += 1
-        elif action == "reduce":
-            basket[pk] = max(1, basket[pk] - 1)
-        elif action == "remove":
-            del basket[pk]
+    basket.pop(str(pk), None)
     request.session["basket"] = basket
-
-    # Redirect to basket view (can also add AJAX support if needed)
-    return redirect("basket:basket_view")
+    messages.success(request, "Item removed.")
+    return redirect(request.META.get("HTTP_REFERER", "basket:basket_view"))

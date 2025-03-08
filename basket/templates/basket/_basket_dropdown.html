@@ -7,12 +7,26 @@
                     <p class="mb-0"><strong>{{ item.project.title }}</strong></p>
                     <p class="mb-0 small">Qty: {{ item.quantity }}</p>
                     <div class="d-flex align-items-center">
-                        <a href="{% url 'basket:update' item.project.pk 'add' %}" class="btn btn-sm btn-primary me-1">+</a>
-                        <a href="{% url 'basket:update' item.project.pk 'reduce' %}" class="btn btn-sm btn-warning me-1">-</a>
-                        <a href="{% url 'basket:update' item.project.pk 'remove' %}" class="btn btn-sm btn-danger">Remove</a>
+                        <form method="POST" action="{% url 'basket:adjust' item.project.pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="{{ item.quantity|add:1 }}">
+                            <button type="submit" class="btn btn-sm btn-primary me-1">+</button>
+                        </form>
+                        <form method="POST" action="{% url 'basket:adjust' item.project.pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="{{ item.quantity|add:'-1' }}">
+                            <button type="submit" class="btn btn-sm btn-warning me-1">-</button>
+                        </form>
+                        <form method="POST" action="{% url 'basket:remove' item.project.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        </form>
                     </div>
                 </div>
             </li>
+            <div class="mt-2">
+                <a href="{% url 'basket:basket_view' %}" class="btn btn-primary btn-sm w-100">Go to Basket</a>
+            </div>
         {% endfor %}
     </ul>
 {% else %}

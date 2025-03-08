@@ -20,18 +20,26 @@
                 {% for item in basket_items %}
                 <tr>
                     <td>{{ item.project.title }}</td>
-                    <td>{{ item.quantity }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'basket:adjust' item.project.pk %}">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control d-inline w-50">
+                            <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                        </form>
+                    </td>
                     <td>£{{ item.project.price|floatformat:2 }}</td>
                     <td>£{{ item.total_price|floatformat:2 }}</td>
                     <td>
-                        <a href="{% url 'basket:update' item.project.pk 'add' %}" class="btn btn-sm btn-primary">+</a>
-                        <a href="{% url 'basket:update' item.project.pk 'reduce' %}" class="btn btn-sm btn-warning">-</a>
-                        <a href="{% url 'basket:update' item.project.pk 'remove' %}" class="btn btn-sm btn-danger">Remove</a>
+                        <form method="POST" action="{% url 'basket:remove' item.project.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <a href="{% url 'gallery:gallery' %}" class="btn btn-secondary">Continue Shopping</a>
     {% else %}
         <p>Your basket is empty.</p>
     {% endif %}
