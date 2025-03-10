@@ -34,9 +34,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-)v#gd0g7$jji6t#6%q&t!+k!uqe47ud$$u54iac=8s6355-r75"
 
-STRIPE_PUBLIC_KEY = os.environ.get("pk_test_51R0N4iQ7dXkC9JrsFpF9CWGMbuDeBIifylkE83KrjlJ7l0hQQdG2fyD48OkiFBPof4lxk7LybgTIhL72vyApLOc800WrZjOwfx", "")
-STRIPE_SECRET_KEY = os.environ.get("sk_test_51R0N4iQ7dXkC9JrsRgOPe9Ag3k0uTQ27oHgW0ljnT3LEhTQ3N3zdZw4gPyEOvQLgCfFyeiNfPc69qixRvPvvqo2100zj6evQ2l", "")
-
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
