@@ -40,6 +40,7 @@
             </tbody>
         </table>
         <a href="{% url 'gallery:gallery' %}" class="btn btn-secondary">Continue Shopping</a>
+        <a href="{% url 'checkout:checkout' %}" class="btn btn-success">Proceed to Checkout</a>
     {% else %}
         <p>Your basket is empty.</p>
     {% endif %}

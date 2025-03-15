@@ -1,15 +1,16 @@
-import stripe
-from django.conf import settings
 from django.shortcuts import render, redirect
-from django.urls import JsonResponse
+from django.http import JsonResponse
+from django.conf import settings
+import stripe
 from basket.context_processors import basket_context
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
-def checkout_view(request):
+def checkout(request):
     """Renders the checkout page with items in the basket."""
     context = basket_context(request)
+    print("CHECKOUT PAGE BASKET CONTEXT:", context)
     return render(request, "checkout/checkout.html", context)
 
 
@@ -41,7 +42,7 @@ def create_checkout_session(request):
         cancel_url=request.build_absolute_uri("/checkout/cancel/"),
     )
 
-    return JsonResponse({"sessino_id": session.id})
+    return JsonResponse({"session_id": session.id})
 
 
 def checkout_success(request):

@@ -1,5 +1,6 @@
 from gallery.models import Project
 
+
 def basket_context(request):
     """Context processor to add basket data globally."""
     basket = request.session.get("basket", {})
