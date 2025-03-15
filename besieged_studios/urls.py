@@ -28,7 +28,7 @@ urlpatterns = [
     path('commissions/', include('commissions.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('accounts/', include('allauth.urls')),
-
+    path('checkout/', include('checkout.urls')),
 ]
 
 if settings.DEBUG:

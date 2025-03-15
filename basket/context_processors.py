@@ -19,4 +19,3 @@ def basket_context(request):
         "basket_count": sum(item["quantity"] for item in basket_items),
         "basket_items": basket_items,
     }
-       
