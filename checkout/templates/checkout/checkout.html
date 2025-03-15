@@ -6,7 +6,6 @@
 <div class="container">
     <h1>Checkout</h1>
     <p>Please review your order and proceed to payment.</p>
-
     {% if basket_items %}
         <table class="table">
             <thead>
@@ -22,32 +21,45 @@
                 <tr>
                     <td>{{ item.project.title }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td>{{ item.project.price|floatformat:2 }}</td>
-                    <td>{{ item.total_price|floatformat:2 }}</td>
+                    <td>£{{ item.project.price|floatformat:2 }}</td>
+                    <td>£{{ item.total_price|floatformat:2 }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <button id="checkout-button" class="btn btn-success">Proceed to Payment</button>
+        <!-- Submit Form -->
+        <form method="POST" action="{% url 'checkout:create_checkout_session' %}">
+            {% csrf_token %}
+            <h3>Billing & Shipping Details</h3>
+            <div class="mb-3">
+                <label for="fullName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <h4>Shipping Address</h4>
+            <div class="mb-3">
+                <label for="houseNumber" class="form-label">House Number/Name</label>
+                <input type="text" class="form-control" id="houseNumber" name="houseNumber" required>
+            </div>
+            <div class="mb-3">
+                <label for="street" class="form-label">Street</label>
+                <input type="text" class="form-control" id="street" name="street" required>
+            </div>
+            <div class="mb-3">
+                <label for="town" class="form-label">Town/City</label>
+                <input type="text" class="form-control" id="town" name="town" required>
+            </div>
+            <div class="mb-3">
+                <label for="postcode" class="form-label">Postcode</label>
+                <input type="text" class="form-control" id="postcode" name="postcode" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-3">Proceed to Payment</button>
+        </form>
     {% else %}
         <p>Your basket is empty.</p>
     {% endif %}
 </div>
-
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-    document.getElementById('checkout-button').addEventListener('click', function () {
-        fetch("{% url 'checkout:create_checkout_session' %}", {
-            method: "GET",
-    })
-    .then(response => response.json())
-    .then(data => {
-        const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
-        stripe.redirectToCheckout({ sessionId: data.session_id });
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
-</script>
 {% endblock %}
