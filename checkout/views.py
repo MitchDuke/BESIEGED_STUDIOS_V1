@@ -29,13 +29,13 @@ def create_checkout_session(request):
 
         # Validate required fields
         if not all([full_name, email, house_number, street, town, postcode]):
-            return redirect("checkout:checkout")  # Redirect back if form is incomplete
+            return redirect("checkout:checkout")  # Redirect back if form incomplete
 
         # Retrieve basket from session
         basket = request.session.get("basket", {})
 
         if not basket:
-            return redirect("basket:basket_view")  # Redirect if basket is empty
+            return redirect("basket:basket_view")  # Redirect if basket empty
 
         # Prepare Stripe line items with correct pricing
         line_items = []
@@ -50,9 +50,9 @@ def create_checkout_session(request):
                 "price_data": {
                     "currency": "gbp",
                     "product_data": {
-                        "name": project.title,  # Display project title
+                        "name": project.title,
                     },
-                    "unit_amount": price_in_pence,  # Correct price
+                    "unit_amount": price_in_pence, 
                 },
                 "quantity": quantity,
             })
@@ -63,8 +63,11 @@ def create_checkout_session(request):
                 line_items=line_items,
                 mode="payment",
                 customer_email=email,
-                billing_address_collection="required",
-                shipping_address_collection={"allowed_countries": ["GB"]},  # UK only
+                billing_address_collection="auto",
+                shipping_address_collection=None,
+                payment_intent_data={
+                    "setup_future_usage": "off_session", # Save card for future payments
+                },
                 metadata={
                     "full_name": full_name,
                     "house_number": house_number,

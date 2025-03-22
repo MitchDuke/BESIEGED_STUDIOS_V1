@@ -24,10 +24,10 @@
                     </div>
                 </div>
             </li>
-            <div class="mt-2">
-                <a href="{% url 'basket:basket_view' %}" class="btn btn-primary btn-sm w-100">Go to Basket</a>
-            </div>
         {% endfor %}
+        <div class="mt-2">
+            <a href="{% url 'basket:basket_view' %}" class="btn btn-primary btn-sm w-100">Go to Basket</a>
+        </div>
     </ul>
 {% else %}
     <p>Your basket is empty.</p>

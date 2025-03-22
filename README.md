@@ -60,3 +60,14 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
     - Admin Dashboard App:
       - Provides a management interface for the site owner.
+
+
+##  Testing
+
+  - Stripe:
+    - To test the Stripe payment system the following test scenarios were used:
+      - Successful payment Card Number: 4242 4242 4242 4242
+      - Failed payment Card Number: 4000 0000 0000 0002 (Declined payment)
+      - Authentication Required (3D Secure) Card Number: 4000 0025 0000 3155 (Requires extra authentication)
+      - Insufficient Funds Card Number: 4000 0000 0000 9995
+    - Using the above card numbers, any future expiry date, any 3 digit CVC number and a valid postcode.
