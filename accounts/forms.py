@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from models import UserProfile
 
+
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password_confirm = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
@@ -9,7 +10,6 @@ class UserRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
-
 
     def clean(self):
         cleaned_data = super().clean()
@@ -20,6 +20,7 @@ class UserRegistrationForm(forms.ModelForm):
             self.add_error('password_confirm', "Passwords do not match.")
 
         return cleaned_data
+
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
