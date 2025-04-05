@@ -124,8 +124,8 @@ SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_REDIRECT_URL = '/accounts/dashboard/' # Redirect after login
-LOGOUT_REDIRECT_URL = '/accounts/login/' # Redirect after logout
+LOGIN_REDIRECT_URL = '/templates/home.html' # Redirect after login
+LOGOUT_REDIRECT_URL = '/templates/home.html' # Redirect after logout
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True

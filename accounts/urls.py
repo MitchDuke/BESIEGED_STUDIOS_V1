@@ -1,5 +1,7 @@
 from django.urls import path, include
+from .views import dashboard
 
 urlpatterns = [
-    path("accounts/", include("accounts.urls")),  # Redirects to Allauth
+    path("dashboard/", dashboard, name="dashboard"),
+    path("", include("allauth.urls")),  # Redirects to Allauth
 ]
