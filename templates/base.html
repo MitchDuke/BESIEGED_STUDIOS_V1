@@ -22,7 +22,29 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'gallery:gallery' %}">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'commissions' %}">Commissions</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}">Login</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard' %}">
+                                {% if user.userprofile %}
+                                    Welcome, {{ user.userprofile.user.username }}
+                                {% else %}
+                                    Welcome, {{ user.username }}
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
             <div id="basket-preview" class="dropdown">

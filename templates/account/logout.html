@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Confirm Logout{% endblock %}
+
+{% block content %}
+<div class="container my-5 text-center">
+    <h2>Are you sure you would like to Logout?</h2>
+    <p>You can continue browsing or logout below</p>
+
+    <!-- Cancel logout -->
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="{% url 'home' %}" class="btn btn-secondary">Continue Browsing</a>
+
+        <!-- Logout form -->
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, please Logout</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
