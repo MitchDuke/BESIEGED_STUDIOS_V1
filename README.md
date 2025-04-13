@@ -71,3 +71,8 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
       - Authentication Required (3D Secure) Card Number: 4000 0025 0000 3155 (Requires extra authentication)
       - Insufficient Funds Card Number: 4000 0000 0000 9995
     - Using the above card numbers, any future expiry date, any 3 digit CVC number and a valid postcode.
+
+##  Bootstrap
+  - Bugs:
+    - Styling:
+      - Custom styling for alerts was applied inline due to Bootstrap's CSS specificity preventing external stylesheet overrides during runtime.

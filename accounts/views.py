@@ -15,5 +15,8 @@ class CustomLogoutView(AllauthLogoutView):
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
+
+        list(messages.get_messages(request))
         messages.success(request, "You have been logged out successfully.")
+
         return response

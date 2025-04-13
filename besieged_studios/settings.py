@@ -126,6 +126,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = '/' # Redirect after login
 LOGOUT_REDIRECT_URL = '/' # Redirect after logout
+ACCOUNT_LOGOUT_MESSAGE = ""
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
