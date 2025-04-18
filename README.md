@@ -73,6 +73,6 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
     - Using the above card numbers, any future expiry date, any 3 digit CVC number and a valid postcode.
 
 ##  Bootstrap
-  - Bugs:
+  - Alerts:
     - Styling:
       - Custom styling for alerts was applied inline due to Bootstrap's CSS specificity preventing external stylesheet overrides during runtime.
