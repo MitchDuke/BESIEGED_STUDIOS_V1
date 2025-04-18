@@ -1,20 +1,17 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from accounts.models import UserProfile
+from checkout.models import Order
 
 
 @login_required
 def dashboard(request):
-    profile = None
-    try:
-        profile = request.user.userprofile
-    except Exception:
-        pass
+    profile = getattr(request.user, "userprofile", None)
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
 
     context = {
         "profile": profile,
-        # Placeholder for later:
-        "orders": [],  # You'll replace with order query
+        "orders": orders,
         "commissions": [],  # Replace later
     }
 

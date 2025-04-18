@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.conf import settings
 import stripe
 from basket.context_processors import basket_context
+from .models import Order, OrderItem
 from gallery.models import Project
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -92,6 +93,31 @@ def create_checkout_session(request):
 
 def checkout_success(request):
     """Handles a successful payment."""
+    basket = request.session.get("basket", {})
+    user = request.user if request.user.is_authenticated else None
+
+    if basket:
+        # Get last stripe session data
+        full_name = request.session.get("full_name", "Guest" )
+        email = request.session.get("email", "noemail@example.com")
+        address = request.session.get("address", "No address provided")
+        session_id = request.session.get("stripe_session_id", "")
+
+        order = Order.objects.create(
+            user=user,
+            stripe_session_id=session_id,
+            full_name=full_name,
+            email=email,
+            address=address,
+        )
+
+        for pk, qty in basket.items():
+            try:
+                project = Project.objects.get(pk=int(pk))  # Get the correct project
+                OrderItem.objects.create(order=order, project=project, quantity=qty)
+            except Project.DoesNotExist:
+                continue
+
     request.session["basket"] = {}  # Clears the basket after a successful payment
     return render(request, "checkout/success.html")
 
