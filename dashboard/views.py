@@ -16,3 +16,12 @@ def dashboard(request):
     }
 
     return render(request, 'dashboard/dashboard.html', context)
+
+
+@login_required
+def order_detail(request, order_id):
+    order = Order.objects.filter(user=request.user, id=order_id).first()
+    if not order:
+        return render(request, "dashboard/order_not_found.html")
+
+    return render(request, "dashboard/order_detail.html", {"order": order})

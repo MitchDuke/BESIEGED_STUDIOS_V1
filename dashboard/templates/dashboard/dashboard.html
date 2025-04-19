@@ -22,7 +22,9 @@
                 <ul class="list-group">
                     {% for order in orders %}
                         <li class="list-group-item">
-                            Order #{{ order.id }} — {{ order.created_at|date:"SHORT_DATE_FORMAT" }}
+                            <a href="{% url 'order_detail' order.id %}">
+                                Order #{{ order.id }} — {{ order.created_at|date:"SHORT_DATE_FORMAT" }}
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>
