@@ -92,13 +92,11 @@ def create_checkout_session(request):
 
 
 def checkout_success(request):
-    """Handles a successful payment."""
     basket = request.session.get("basket", {})
     user = request.user if request.user.is_authenticated else None
 
     if basket:
-        # Get last stripe session data
-        full_name = request.session.get("full_name", "Guest" )
+        full_name = request.session.get("full_name", "Guest")
         email = request.session.get("email", "noemail@example.com")
         address = request.session.get("address", "No address provided")
         session_id = request.session.get("stripe_session_id", "")
@@ -113,12 +111,19 @@ def checkout_success(request):
 
         for pk, qty in basket.items():
             try:
-                project = Project.objects.get(pk=int(pk))  # Get the correct project
+                project = Project.objects.get(pk=int(pk))
                 OrderItem.objects.create(order=order, project=project, quantity=qty)
             except Project.DoesNotExist:
                 continue
 
-    request.session["basket"] = {}  # Clears the basket after a successful payment
+    # Clear basket
+    request.session["basket"] = {}
+
+    # Clean up checkout details from session
+    for key in ["full_name", "email", "address", "stripe_session_id"]:
+        if key in request.session:
+            del request.session[key]
+
     return render(request, "checkout/success.html")
 
 
