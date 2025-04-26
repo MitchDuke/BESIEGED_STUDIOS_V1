@@ -28,24 +28,25 @@ def create_checkout_session(request):
         town = request.POST.get("town")
         postcode = request.POST.get("postcode")
 
-        # Validate required fields
-        if not all([full_name, email, house_number, street, town, postcode]):
-            return redirect("checkout:checkout")  # Redirect back if form incomplete
+        # SAVE these into session before creating Stripe session!
+        request.session["full_name"] = full_name
+        request.session["email"] = email
+        request.session["address"] = f"{house_number} {street}, {address_line2}, {town}, {postcode}"
 
         # Retrieve basket from session
         basket = request.session.get("basket", {})
 
         if not basket:
-            return redirect("basket:basket_view")  # Redirect if basket empty
+            return redirect("basket:basket_view")
 
-        # Prepare Stripe line items with correct pricing
+        # Prepare Stripe line items
         line_items = []
         for pk, quantity in basket.items():
             try:
-                project = Project.objects.get(pk=int(pk))  # Get the correct project
-                price_in_pence = int(project.price * 100)  # Convert price to pence
+                project = Project.objects.get(pk=int(pk))
+                price_in_pence = int(project.price * 100)
             except Project.DoesNotExist:
-                continue  # Skip items that don't exist
+                continue
 
             line_items.append({
                 "price_data": {
@@ -53,7 +54,7 @@ def create_checkout_session(request):
                     "product_data": {
                         "name": project.title,
                     },
-                    "unit_amount": price_in_pence, 
+                    "unit_amount": price_in_pence,
                 },
                 "quantity": quantity,
             })
@@ -66,9 +67,6 @@ def create_checkout_session(request):
                 customer_email=email,
                 billing_address_collection="auto",
                 shipping_address_collection=None,
-                payment_intent_data={
-                    "setup_future_usage": "off_session", # Save card for future payments
-                },
                 metadata={
                     "full_name": full_name,
                     "house_number": house_number,
@@ -81,14 +79,16 @@ def create_checkout_session(request):
                 cancel_url=request.build_absolute_uri("/checkout/cancel/"),
             )
 
-            # Redirect the user to Stripe for payment
+            # Also store session ID so we can link it later
+            request.session["stripe_session_id"] = session.id
+
             return redirect(session.url)
 
         except Exception as e:
-            print("Stripe Error:", str(e))  # Debugging
-            return redirect("checkout:checkout")  # Redirect back on failure
+            print("Stripe Error:", str(e))
+            return redirect("checkout:checkout")
 
-    return redirect("checkout:checkout")  # Redirect if accessed via GET
+    return redirect("checkout:checkout")
 
 
 def checkout_success(request):
