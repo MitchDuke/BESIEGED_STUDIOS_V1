@@ -6,6 +6,7 @@ from basket.context_processors import basket_context
 from .models import Order, OrderItem
 from gallery.models import Project
 from django.contrib import messages
+from django.urls import reverse
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -61,6 +62,9 @@ def create_checkout_session(request):
 
         try:
             # Create the Stripe session
+            success_url = request.build_absolute_uri(reverse('checkout:checkout_success'))
+            cancel_url = request.build_absolute_uri(reverse('checkout:checkout_cancel'))
+
             session = stripe.checkout.Session.create(
                 payment_method_types=["card"],
                 line_items=line_items,
@@ -76,8 +80,8 @@ def create_checkout_session(request):
                     "town": town,
                     "postcode": postcode,
                 },
-                success_url=request.build_absolute_uri("/checkout/success/"),
-                cancel_url=request.build_absolute_uri("/checkout/cancel/"),
+                success_url=success_url,
+                cancel_url=cancel_url,
             )
 
             # Save the Stripe session ID immediately after creation
