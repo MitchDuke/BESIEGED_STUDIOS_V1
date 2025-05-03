@@ -44,7 +44,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Heroku settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-ALLOWED_HOSTS = ['besieged_studios.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['besieged-studios.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
