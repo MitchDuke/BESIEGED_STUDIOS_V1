@@ -10,6 +10,7 @@ class Order(models.Model):
     email = models.EmailField()
     address = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    paid = models.BooleanField(default=False)
 
     def __str__(self):
         return f"order #{self.id} by {self.full_name}"
