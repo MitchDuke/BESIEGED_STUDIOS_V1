@@ -54,6 +54,23 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
     - Commission App:
       - Handles commission requests, orders, and payments.
+        - Select Category:
+          - Single Miniature
+          - Squad
+          - Colossal Monster/Vehicle
+          - Terrain
+
+      - Select Sub-options (dynamic form inputs):
+          - For Squad: choose squad size
+          - For Terrain: choose max dimension
+          - Case-by-case flag if special size exceeds limit
+
+      - Auto-calculate Base Price + Assembly/Priming %
+      - Upload Image (optional)
+      - Add Notes / Requirements
+      - Show Price or Flag for Manual Quote
+      - Submit to Dashboard:
+        - Status = "Ready to Checkout" or "Pending Quote"
 
     - Authentication App:
       - Manages user registration, login, and profiles.
@@ -76,3 +93,5 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - Alerts:
     - Styling:
       - Custom styling for alerts was applied inline due to Bootstrap's CSS specificity preventing external stylesheet overrides during runtime.
+
+
