@@ -3,6 +3,8 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Order
+import logging
+logger = logging.getLogger(__name__)
 
 
 @csrf_exempt
@@ -12,7 +14,6 @@ def stripe_webhook(request):
     event = None
 
     try:
-        # This is where the secret is used
         event = stripe.Webhook.construct_event(
             payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
         )
