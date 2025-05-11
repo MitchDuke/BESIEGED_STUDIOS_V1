@@ -42,11 +42,15 @@
         {% if commissions %}
             <ul class="list-group">
                 {% for commission in commissions %}
-                    <li class="list-group-item">Request #{{ commission.id }} — Status: {{ commission.status }}</li>
+                    <li class="list-group-item">
+                        <a href="{% url 'commissions:commission_detail' commission.id %}">
+                            Request #{{ commission.id }} — Status: {{ commission.status }}
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No commissions yet. Why not <a href="{% url 'commissions' %}">request one</a>?</p>
+            <p>No commissions yet. Why not <a href="{% url 'commissions:smart_commission_redirect' %}">request one</a>?</p>
         {% endif %}
     </div>
 </div>

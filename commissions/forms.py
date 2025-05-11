@@ -6,14 +6,14 @@ class CommissionQuoteForm(forms.ModelForm):
     class Meta:
         model = CommissionQuote
         fields = [
-            'quote_type',
-            'subtype',
-            'size',
-            'assembly_required',
-            'priming_required',
-            'description',
-            'reference_image',
+            'category',
+            'size_option',
+            'base_price',
+            'assembly_cost',
+            'total_price',
+            'image',
+            'notes',
         ]
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4}),
+            'notes': forms.Textarea(attrs={'rows': 4}),
         }
