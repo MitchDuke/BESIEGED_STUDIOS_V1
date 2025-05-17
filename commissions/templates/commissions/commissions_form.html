@@ -4,10 +4,35 @@
 {% block content %}
 <div class="container">
   <h2>Submit a Commission Quote</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit Quote</button>
-  </form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_size_option">Size Option</label>
+            <select name="size_option" id="id_size_option" class="form-control w-50">
+                <option value="">--- Select Category First ---</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            {{ form.notes.label_tag }}
+            {{ form.notes }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Commission Request</button>
+    </form>
 </div>
+
+<script src="{% static 'commissions/js/commissions_script.js' %}"></script>
+
 {% endblock %}
