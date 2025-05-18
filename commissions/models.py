@@ -18,6 +18,8 @@ class CommissionQuote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     size_option = models.CharField(max_length=50, blank=True)
+    assembly_required = models.BooleanField(default=False)
+    priming_required = models.BooleanField(default=False)
     base_price = models.DecimalField(max_digits=6, decimal_places=2)
     assembly_cost = models.DecimalField(max_digits=6, decimal_places=2)
     total_price = models.DecimalField(max_digits=6, decimal_places=2)

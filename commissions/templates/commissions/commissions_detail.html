@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Commission Detail{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Commission Request Details</h2>
+    <p><strong>Category:</strong> {{ commission.get_category_display }}</p>
+    <p><strong>Size:</strong> {{ commission.size_option }}</p>
+    <p><strong>Assembly Required:</strong> {{ commission.assembly_required|yesno:"Yes,No" }}</p>
+    <p><strong>Priming Required:</strong> {{ commission.priming_required|yesno:"Yes,No" }}</p>
+    <p><strong>Notes:</strong> {{ commission.notes }}</p>
+    {% if commission.image %}
+        <p><strong>Image:</strong><br><img src="{{ commission.image.url }}" class="img-thumbnail" style="max-width: 300px;"></p>
+    {% endif %}
+    <hr>
+    <p><strong>Base Price:</strong> ${{ commission.base_price }}</p>
+    <p><strong>Assembly Uplift:</strong> ${{ commission.assembly_cost }}</p>
+    <p><strong>Total Price:</strong> <strong>${{ commission.total_price }}</strong></p>
+
+    <hr>
+    <a href="{% url 'commissions:delete_commission' commission.pk %}" class="btn btn-danger">Delete Commission</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    <!-- Optional future actions: -->
+    <!-- <a href="#" class="btn btn-success">Add to Basket</a> -->
+</div>
+{% endblock %}
