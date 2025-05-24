@@ -10,6 +10,8 @@ def create_commission_quote(request):
     if request.method == 'POST':
         form = CommissionQuoteForm(request.POST, request.FILES)
         if form.is_valid():
+            print("Form is valid")
+
             # Set the base price based on the category
             category_price = {
                 'single_mini': 10.00,
@@ -35,9 +37,15 @@ def create_commission_quote(request):
             quote.base_price = base_price
             quote.assembly_cost = assembly_cost
             quote.total_price = total_price
+
+            print(f"Saving quote: {quote}")
+
             quote.save()
 
             return redirect('commissions:commission_detail', pk=quote.pk)
+        else:
+            print("Form is not valid!")
+            print(form.errors)
     else:
         form = CommissionQuoteForm()
 
