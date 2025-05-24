@@ -23,3 +23,38 @@ class CommissionQuoteForm(forms.ModelForm):
             required=True,
             widget=forms.Select(attrs={'class': 'form-select'})
         )
+
+        # Dynamically populate size_option choices based on category
+        if 'category' in self.data:
+            category = self.data.get('category')
+            self.fields['size_option'].choices = self.get_size_options(category)
+
+    def get_size_options(self, category):
+        """Return size options based on selected category"""
+        CATEGORY_OPTIONS = {
+            'single_mini': [
+                ('small_hero', 'Small Hero (+10%)'),
+                ('monster', 'Monster (+10%)'),
+                ('tank', 'Tank/Walker (+15%)'),
+            ],
+            'squad': [
+                ('0_5', '0 to 5 Men (+10%)'),
+                ('6_10', '6 to 10 Men (+10%)'),
+                ('11_15', '11 to 15 Men (+10%)'),
+                ('16_20', '16 to 20 Men (+15%)'),
+                ('21_plus', '21+ Men (Case by Case)'),
+            ],
+            'colossal': [
+                ('colossal_monster', 'Colossal Monster (+20%)'),
+                ('colossal_vehicle', 'Colossal Vehicle (+20%)'),
+                ('over_20cm', 'Over 20cm (Case by Case)'),
+            ],
+            'terrain': [
+                ('10cm', '≤ 10cm Combined (+10%)'),
+                ('20cm', '≤ 20cm Combined (+15%)'),
+                ('40cm', '≤ 40cm Combined (+20%)'),
+                ('50cm', '> 50cm Combined (Case by Case)'),
+            ],
+        }
+
+        return CATEGORY_OPTIONS.get(category, [])

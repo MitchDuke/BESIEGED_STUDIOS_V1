@@ -42,7 +42,7 @@ def create_commission_quote(request):
 
             quote.save()
 
-            return redirect('commissions:commission_detail', pk=quote.pk)
+            return redirect('commissions:commissions_detail', pk=quote.pk)
         else:
             print("Form is not valid!")
             print(form.errors)
@@ -54,7 +54,7 @@ def create_commission_quote(request):
 
 class CommissionQuoteDetailView(DetailView):
     model = CommissionQuote
-    template_name = 'commissions/commission_detail.html'
+    template_name = 'commissions/commissions_detail.html'
     context_object_name = 'commission'
 
 
