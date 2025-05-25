@@ -1,8 +1,15 @@
+{% load static %}
 {% if basket_items %}
     <ul class="list-unstyled mb-0">
         {% for item in basket_items %}
             <li class="mb-2 d-flex align-items-center">
-                <img src="{{ item.project.image.url }}" alt="{{ item.project.title }}" class="img-thumbnail me-2" style="width: 50px; height: auto;">
+                {% if item.is_commission %}
+                    <!-- If the item is a commission, use the default image from MEDIA_URL -->
+                    <img src="{{ '/media/gallery/images/dwarf_forge.png' }}" alt="Commission Image" class="img-thumbnail me-2" style="width: 50px; height: auto;">
+                {% else %}
+                    <!-- If it's a gallery project, use the project's image -->
+                    <img src="{{ item.project.image.url }}" alt="{{ item.project.title }}" class="img-thumbnail me-2" style="width: 50px; height: auto;">
+                {% endif %}
                 <div class="flex-grow-1">
                     <p class="mb-0"><strong>{{ item.project.title }}</strong></p>
                     <p class="mb-0 small">Qty: {{ item.quantity }}</p>
