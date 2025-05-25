@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .forms import CommissionQuoteForm
 from django.views.generic.detail import DetailView
 from .models import CommissionQuote
@@ -60,6 +61,7 @@ class CommissionQuoteDetailView(DetailView):
 
 @login_required
 def smart_commission_redirect(request):
+    # Redirects user to the dashboard if they have commissions, otherwise to create a new commission
     user = request.user
     has_commissions = CommissionQuote.objects.filter(user=user).exists()
 
@@ -70,6 +72,7 @@ def smart_commission_redirect(request):
 
 @login_required
 def delete_commission(request, pk):
+    # Deletes a commission quote if it belongs to the user
     commission = CommissionQuote.objects.get(pk=pk)
     if commission.user == request.user:
         commission.delete()
@@ -83,3 +86,28 @@ def dashboard(request):
         'commissions': commissions,
     }
     return render(request, 'dashboard.html', context)
+
+
+@login_required
+def add_to_basket(request, pk):
+    # Adds commission to the basket
+    try:
+        commission = CommissionQuote.objects.get(pk=pk)
+    except CommissionQuote.DoesNotExist:
+        # Handle the case where the commission does not exist
+        messages.error(request, "Commission not found.")
+        return redirect('commissions:dashboard')
+
+    # Initialize the basket session if it doesn't exist
+    basket = request.session.get('basket', {})
+
+    # Add the commission to the basket
+    if str(commission.pk) not in basket:
+        basket[str(commission.pk)] = {'quantity': 1, 'price': commission.total_price}
+    else:
+        basket[str(commission.pk)]['quantity'] += 1
+
+    request.session['basket'] = basket
+
+    messages.success(request, f"Commission '{commission.pk} added to basket.")
+    return redirect('checkout:checkout')
