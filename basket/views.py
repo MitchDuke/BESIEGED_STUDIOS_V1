@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from gallery.models import Project
+from commissions.models import CommissionQuote
 
 
 def basket_view(request):
@@ -17,7 +18,16 @@ def basket_view(request):
                 "total_price": project.price * quantity,
             })
         except Project.DoesNotExist:
-            continue
+            try:
+                commission = CommissionQuote.objects.get(pk=int(pk))
+                basket_items.append({
+                    "project": commission,
+                    "quantity": quantity,
+                    "total_price": commission.total_price * quantity,
+                    "is_commission": True,
+                })
+            except CommissionQuote.DoesNotExist:
+                continue
 
     return render(request, "basket/basket.html", {"basket_items": basket_items})
 

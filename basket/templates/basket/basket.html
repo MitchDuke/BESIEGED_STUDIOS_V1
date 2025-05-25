@@ -19,7 +19,13 @@
             <tbody>
                 {% for item in basket_items %}
                 <tr>
-                    <td>{{ item.project.title }}</td>
+                    <td>
+                        {% if item.is_commission %}
+                            Commission #{{ item.project.pk }} - {{ item.project.get_category_display }}
+                        {% else %}
+                            {{ item.project.title }}
+                        {% endif %}
+                    </td>
                     <td>
                         <form method="POST" action="{% url 'basket:adjust' item.project.pk %}">
                             {% csrf_token %}

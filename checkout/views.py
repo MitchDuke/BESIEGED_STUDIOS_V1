@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
 from django.conf import settings
 import stripe
 from basket.context_processors import basket_context
@@ -7,14 +6,39 @@ from .models import Order, OrderItem
 from gallery.models import Project
 from django.contrib import messages
 from django.urls import reverse
+from commissions.models import CommissionQuote
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def checkout(request):
     """Renders the checkout page with items in the basket."""
-    context = basket_context(request)
-    print("CHECKOUT PAGE BASKET CONTEXT:", context)
+    basket = request.session.get('basket', {})
+    basket_items = []
+
+    for pk, quantity in basket.items():
+        # Try to get a Project first, else check for a CommissionQuote
+        try:
+            project = Project.objects.get(pk=int(pk))  # Try to get a Project
+            basket_items.append({
+                "project": project,
+                "quantity": quantity,
+                "total_price": project.price * quantity,
+                "is_commission": False
+            })
+        except Project.DoesNotExist:
+            try:
+                commission = CommissionQuote.objects.get(pk=int(pk))  # Try to get a CommissionQuote
+                basket_items.append({
+                    "project": commission, 
+                    "quantity": quantity,
+                    "total_price": commission.total_price * quantity,
+                    "is_commission": True
+                })
+            except CommissionQuote.DoesNotExist:
+                continue  # Skip if neither Project nor CommissionQuote found
+
+    context = {"basket_items": basket_items}
     return render(request, "checkout/checkout.html", context)
 
 

@@ -102,12 +102,12 @@ def add_to_basket(request, pk):
     basket = request.session.get('basket', {})
 
     # Add the commission to the basket
-    if str(commission.pk) not in basket:
-        basket[str(commission.pk)] = {'quantity': 1, 'price': commission.total_price}
+    key = str(commission.pk)
+    if key in basket:
+        basket[key] += 1
     else:
-        basket[str(commission.pk)]['quantity'] += 1
-
+        basket[key] = 1
     request.session['basket'] = basket
 
-    messages.success(request, f"Commission '{commission.pk} added to basket.")
+    messages.success(request, f"Commission '{commission.pk}' added to basket.")
     return redirect('checkout:checkout')
