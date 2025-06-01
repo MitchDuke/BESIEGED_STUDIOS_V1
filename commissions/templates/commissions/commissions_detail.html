@@ -13,9 +13,11 @@
         <p><strong>Image:</strong><br><img src="{{ commission.image.url }}" class="img-thumbnail" style="max-width: 300px;"></p>
     {% endif %}
     <hr>
-    <p><strong>Base Price:</strong> ${{ commission.base_price }}</p>
-    <p><strong>Assembly Uplift:</strong> ${{ commission.assembly_cost }}</p>
-    <p><strong>Total Price:</strong> <strong>${{ commission.total_price }}</strong></p>
+    <p><strong>Base Price:</strong> £{{ commission.base_price }}</p>
+    <p><strong>Assembly Uplift:</strong> £{{ commission.assembly_cost }}</p>
+    <p><strong>Priming Uplift:</strong> £{{ commission.priming_cost }}</p>
+    <p><strong>Size Uplift:</strong> £{{ commission.size_uplift }}</p>
+    <p><strong>Total Price:</strong> <strong>£{{ commission.total_price }}</strong></p>
 
     <hr>
     <a href="{% url 'commissions:delete_commission' commission.pk %}" class="btn btn-danger">Delete Commission</a>

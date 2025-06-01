@@ -29,20 +29,37 @@ def create_commission_quote(request):
             assembly_cost = 15.00 if form.cleaned_data['assembly_required'] else 0.00
             priming_cost = 5.00 if form.cleaned_data['priming_required'] else 0.00
 
+            # Calculate percentage uplift for the size
+            size_option = form.cleaned_data.get('size_option', '')
+            size_uplift = 0
+            if size_option == "monster":
+                size_uplift = 0.15  # Example: 15% uplift for "Monster"
+            elif size_option == "tank":
+                size_uplift = 0.15  # Example: 15% uplift for "Tank"
+            elif size_option == "colossal_monster":
+                size_uplift = 0.20  # Example: 20% uplift for "Colossal Monster"
+            # Add other size options as needed...
+
+            # Apply the size uplift percentage
+            uplift_amount = base_price * size_uplift
+
             # Calculate total price
-            total_price = base_price + assembly_cost + priming_cost
+            total_price = base_price + assembly_cost + priming_cost + uplift_amount
 
             # Save the commission quote
             quote = form.save(commit=False)
             quote.user = request.user
             quote.base_price = base_price
             quote.assembly_cost = assembly_cost
-            quote.total_price = total_price
+            quote.priming_cost = priming_cost
+            quote.size_uplift = uplift_amount  # Save uplift for reference
+            quote.total_price = total_price  # Update the total price
 
             print(f"Saving quote: {quote}")
 
             quote.save()
 
+            # Redirect to the commission detail page after saving
             return redirect('commissions:commissions_detail', pk=quote.pk)
         else:
             print("Form is not valid!")
@@ -62,11 +79,11 @@ class CommissionQuoteDetailView(DetailView):
 @login_required
 def smart_commission_redirect(request):
     # Redirects user to the dashboard if they have commissions, otherwise to create a new commission
-    user = request.user
-    has_commissions = CommissionQuote.objects.filter(user=user).exists()
+    # user = request.user
+    # has_commissions = CommissionQuote.objects.filter(user=user).exists()
 
-    if has_commissions:
-        return redirect('dashboard')
+    # if has_commissions:
+        # return redirect('dashboard')
     return redirect('commissions:create_commission')
 
 

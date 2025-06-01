@@ -11,6 +11,8 @@ def dashboard(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     commissions = CommissionQuote.objects.filter(user=request.user).order_by('-created_at')
 
+    print("Commssions: ", commissions)
+
     context = {
         "profile": profile,
         "orders": orders,
