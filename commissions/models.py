@@ -24,7 +24,7 @@ class CommissionQuote(models.Model):
     assembly_cost = models.DecimalField(max_digits=6, decimal_places=2)
     priming_cost = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     size_uplift = models.DecimalField(max_digits=6, decimal_places=2, default=0)
-    total_price = models.DecimalField(max_digits=6, decimal_places=2)
+    total_price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     image = models.ImageField(upload_to='commission_uploads/', blank=True, null=True)
     notes = models.TextField(blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ready')

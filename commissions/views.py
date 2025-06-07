@@ -33,26 +33,35 @@ def create_commission_quote(request):
             size_option = form.cleaned_data.get('size_option', '')
             size_uplift = 0
             if size_option == "monster":
-                size_uplift = 0.5 # Example: 50% uplift for "Monster"
+                size_uplift = 0.5  # Example: 50% uplift for "Monster"
             elif size_option == "tank":
-                size_uplift = 0.75 # Example: 75% uplift for "Tank/Walker"
+                size_uplift = 0.75  # Example: 75% uplift for "Tank/Walker"
             elif size_option == "colossal_monster":
-                size_uplift = 2.0 # Example: 200% uplift for "Colossal Monster"
+                size_uplift = 2.0  # Example: 200% uplift for "Colossal Monster"
             elif size_option == "colossal_vehicle":
-                size_uplift = 2.0 # Example: 200% uplift for "Colossal Vehicle"
+                size_uplift = 2.0  # Example: 200% uplift for "Colossal Vehicle"
             elif size_option == "6_10":
-                size_uplift = 0.5 # Example: 50% uplift for "6 to 10 models"
+                size_uplift = 0.5  # Example: 50% uplift for "6 to 10 models"
             elif size_option == "11_15":
-                size_uplift = 1.0 # Example: 100% uplift for "11 to 15 models"
+                size_uplift = 1.0  # Example: 100% uplift for "11 to 15 models"
             elif size_option == "16_20":
-                size_uplift = 1.5 # Example: 150% uplift for "16 to 20 models"
-            # Add other size options as needed...
+                size_uplift = 1.5  # Example: 150% uplift for "16 to 20 models"
+            elif size_option == "21_plus" or size_option == "over_20cm" or size_option == "50cm":
+                # Handle case by case for large squads, models or terrain
+                size_uplift = 0.0  # Price is panding manual quote
+                price_status = 'pending'
+            else:
+                price_status = 'ready'  # Default status for other sizes
+            # Add other size options if required...
 
             # Apply the size uplift percentage
             uplift_amount = base_price * size_uplift
 
             # Calculate total price
-            total_price = base_price + assembly_cost + priming_cost + uplift_amount
+            if price_status == 'pending':
+                total_price = 0
+            else:
+                total_price = base_price + assembly_cost + priming_cost + uplift_amount
 
             # Save the commission quote
             quote = form.save(commit=False)
@@ -62,6 +71,7 @@ def create_commission_quote(request):
             quote.priming_cost = priming_cost
             quote.size_uplift = uplift_amount  # Save uplift for reference
             quote.total_price = total_price  # Update the total price
+            quote.status = price_status  # Set status to 'pending' or 'ready'
 
             print(f"Saving quote: {quote}")
 
@@ -96,7 +106,7 @@ def smart_commission_redirect(request):
     # has_commissions = CommissionQuote.objects.filter(user=user).exists()
 
     # if has_commissions:
-        # return redirect('dashboard')
+    # return redirect('dashboard')
     return redirect('commissions:create_commission')
 
 
