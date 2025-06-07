@@ -15,9 +15,9 @@ def create_commission_quote(request):
 
             # Set the base price based on the category
             category_price = {
-                'single_mini': 10.00,
-                'squad': 30.00,
-                'colossal': 100.00,
+                'single_mini': 50.00,
+                'squad': 100.00,
+                'colossal': 200.00,
                 'terrain': 50.00,
             }
 
@@ -26,18 +26,26 @@ def create_commission_quote(request):
             base_price = category_price.get(category, 0.00)
 
             # Calculate any additional costs
-            assembly_cost = 15.00 if form.cleaned_data['assembly_required'] else 0.00
-            priming_cost = 5.00 if form.cleaned_data['priming_required'] else 0.00
+            assembly_cost = 20.00 if form.cleaned_data['assembly_required'] else 0.00
+            priming_cost = 15.00 if form.cleaned_data['priming_required'] else 0.00
 
             # Calculate percentage uplift for the size
             size_option = form.cleaned_data.get('size_option', '')
             size_uplift = 0
             if size_option == "monster":
-                size_uplift = 0.15  # Example: 15% uplift for "Monster"
+                size_uplift = 0.5 # Example: 50% uplift for "Monster"
             elif size_option == "tank":
-                size_uplift = 0.15  # Example: 15% uplift for "Tank"
+                size_uplift = 0.75 # Example: 75% uplift for "Tank/Walker"
             elif size_option == "colossal_monster":
-                size_uplift = 0.20  # Example: 20% uplift for "Colossal Monster"
+                size_uplift = 2.0 # Example: 200% uplift for "Colossal Monster"
+            elif size_option == "colossal_vehicle":
+                size_uplift = 2.0 # Example: 200% uplift for "Colossal Vehicle"
+            elif size_option == "6_10":
+                size_uplift = 0.5 # Example: 50% uplift for "6 to 10 models"
+            elif size_option == "11_15":
+                size_uplift = 1.0 # Example: 100% uplift for "11 to 15 models"
+            elif size_option == "16_20":
+                size_uplift = 1.5 # Example: 150% uplift for "16 to 20 models"
             # Add other size options as needed...
 
             # Apply the size uplift percentage
@@ -74,6 +82,11 @@ class CommissionQuoteDetailView(DetailView):
     model = CommissionQuote
     template_name = 'commissions/commissions_detail.html'
     context_object_name = 'commission'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(f"Commission context: {context}")  # Add this to debug the context being passed
+        return context
 
 
 @login_required

@@ -33,16 +33,16 @@ class CommissionQuoteForm(forms.ModelForm):
         """Return size options based on selected category"""
         CATEGORY_OPTIONS = {
             'single_mini': [
-                ('small_hero', 'Small Hero (+10%)'),
-                ('monster', 'Monster (+10%)'),
-                ('tank', 'Tank/Walker (+15%)'),
+                ('small_hero', 'Small Hero (+0%)'),
+                ('monster', 'Monster (+50%)'),
+                ('tank', 'Tank/Walker (+75%)'),
             ],
             'squad': [
-                ('0_5', '0 to 5 Men (+10%)'),
-                ('6_10', '6 to 10 Men (+10%)'),
-                ('11_15', '11 to 15 Men (+10%)'),
-                ('16_20', '16 to 20 Men (+15%)'),
-                ('21_plus', '21+ Men (Case by Case)'),
+                ('1_5', 'Up to 5 Models (+10%)'),
+                ('6_10', '6 to 10 Models (+10%)'),
+                ('11_15', '11 to 15 Models (+10%)'),
+                ('16_20', '16 to 20 Models (+15%)'),
+                ('21_plus', '21+ Models (Case by Case)'),
             ],
             'colossal': [
                 ('colossal_monster', 'Colossal Monster (+20%)'),
