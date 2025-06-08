@@ -7,6 +7,8 @@ from gallery.models import Project
 from django.contrib import messages
 from django.urls import reverse
 from commissions.models import CommissionQuote
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -164,3 +166,15 @@ def checkout_success(request):
 def checkout_cancel(request):
     """Handles a cancelled payment."""
     return render(request, "checkout/cancel.html")
+
+def send_order_email(order):
+    """Sends an email confirmation for the order."""
+    subject = f"Order #{order.id} Confirmation"
+    message = render_to_string('checkout/order_confirmation_mail.html', {'order': order})
+    send_mail(
+        subject,
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [order.email],  # Send to the customer's email
+        fail_silently=False,
+    )

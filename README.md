@@ -81,6 +81,13 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 ##  Testing
 
+
+  - Emails:
+    - Account creation verification
+      - Tested using temp-mail.org
+    - Order confirmation
+    - Commission quotation pending email
+
   - Stripe:
     - To test the Stripe payment system the following test scenarios were used:
       - Successful payment Card Number: 4242 4242 4242 4242
@@ -93,5 +100,4 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - Alerts:
     - Styling:
       - Custom styling for alerts was applied inline due to Bootstrap's CSS specificity preventing external stylesheet overrides during runtime.
-
 
