@@ -149,6 +149,9 @@ def checkout_success(request):
             except Project.DoesNotExist:
                 continue
 
+        # Send confirmation email
+        send_order_email(order)
+
     # Clear basket
     request.session["basket"] = {}
 
@@ -167,10 +170,11 @@ def checkout_cancel(request):
     """Handles a cancelled payment."""
     return render(request, "checkout/cancel.html")
 
+
 def send_order_email(order):
     """Sends an email confirmation for the order."""
     subject = f"Order #{order.id} Confirmation"
-    message = render_to_string('checkout/order_confirmation_mail.html', {'order': order})
+    message = render_to_string('checkout/order_confirmation_email.html', {'order': order})
     send_mail(
         subject,
         message,
