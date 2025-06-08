@@ -198,4 +198,5 @@ def send_order_email(order):
         settings.DEFAULT_FROM_EMAIL,
         [order.email],  # Send to the customer's email
         fail_silently=False,
+        html_message=message,  # Include HTML content if available
     )
