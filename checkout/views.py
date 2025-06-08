@@ -142,12 +142,24 @@ def checkout_success(request):
             address=address,
         )
 
+        # Create OrderItems for each item in the basket
+        total_price = 0 # Initialize total price for the order
         for pk, qty in basket.items():
             try:
                 project = Project.objects.get(pk=int(pk))
-                OrderItem.objects.create(order=order, project=project, quantity=qty)
+                order_item = OrderItem.objects.create(
+                    order=order,
+                    project=project,
+                    quantity=qty
+                )
+                total_price += project.price * qty
+                print(f"created OrderItem: {order_item} for {project.title}")
             except Project.DoesNotExist:
                 continue
+
+        # Update the order's total price
+        order.total_price = total_price
+        order.save()
 
         # Send confirmation email
         send_order_email(order)
@@ -175,6 +187,11 @@ def send_order_email(order):
     """Sends an email confirmation for the order."""
     subject = f"Order #{order.id} Confirmation"
     message = render_to_string('checkout/order_confirmation_email.html', {'order': order})
+
+    print(f"Sending order email to {order.email} with order items")
+    for item in order.items.all():
+        print(f" - {item.project.title} (Qty: {item.quantity}) - £{item.project.price}")
+
     send_mail(
         subject,
         message,

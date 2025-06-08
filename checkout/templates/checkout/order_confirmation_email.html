@@ -1,10 +1,16 @@
 <h2>Your Order Confirmation</h2>
 <p>Thank you for your order! Your order number is {{ order.id }}.</p>
+
+<p><strong>Delivery Address:</strong></p>
+<p>{{ order.address }}</p>
+
 <p>Order Details:</p>
 <ul>
     {% for item in order.items.all %}
-        <li>{{ item.product.name }} x{{ item.quantity }} - £{{ item.total_price }}</li>
+        <li>{{ item.project.title }} x{{ item.quantity }} - £{{ item.project.price|floatformat:2 }}</li>
     {% endfor %}
 </ul>
-<p>Total Price: £{{ order.total_price }}</p>
+
+<p><strong>Total Price:</strong> £{{ order.total_price|floatformat:2 }}</p>
+
 <p>We will notify you once your order is processed. Thank you for shopping with us!</p>
