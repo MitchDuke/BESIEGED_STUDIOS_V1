@@ -29,6 +29,9 @@ def create_commission_quote(request):
             assembly_cost = 20.00 if form.cleaned_data['assembly_required'] else 0.00
             priming_cost = 15.00 if form.cleaned_data['priming_required'] else 0.00
 
+            # Initialize price status
+            price_status = 'ready'  # Default status for ready quotes
+
             # Calculate percentage uplift for the size
             size_option = form.cleaned_data.get('size_option', '')
             size_uplift = 0
