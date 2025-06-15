@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from accounts.views import CustomConfirmEmailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -27,7 +28,8 @@ urlpatterns = [
     path('basket/', include('basket.urls')),
     path('commissions/', include('commissions.urls', namespace='commissions')),
     path('dashboard/', include('dashboard.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/confirm-email/', CustomConfirmEmailView.as_view(), name='account_confirm_email'),
     path('checkout/', include('checkout.urls', namespace="checkout")),
 ]
 

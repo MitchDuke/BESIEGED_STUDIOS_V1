@@ -1,5 +1,6 @@
 from django.contrib import messages
 from allauth.account.views import LogoutView as AllauthLogoutView
+from allauth.account.views import ConfirmEmailView
 
 
 class CustomLogoutView(AllauthLogoutView):
@@ -12,3 +13,7 @@ class CustomLogoutView(AllauthLogoutView):
         messages.success(request, "You have been logged out successfully.")
 
         return response
+
+
+class CustomConfirmEmailView(ConfirmEmailView):
+    template_name = 'allauth/account/confirm-email.html'

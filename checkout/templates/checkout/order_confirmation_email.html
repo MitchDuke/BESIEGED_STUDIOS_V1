@@ -1,16 +1,30 @@
-<h2>Your Order Confirmation</h2>
-<p>Thank you for your order! Your order number is {{ order.id }}.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;">
+    <h2 style="color: #333;">Your Order Confirmation</h2>
+    <p>Thank you for your order! Your order number is <strong>{{ order.id }}</strong>.</p>
 
-<p><strong>Delivery Address:</strong></p>
-<p>{{ order.address }}</p>
+    <p><strong>Delivery Address:</strong></p>
+    <p style="font-style: italic;">{{ order.address }}</p>
 
-<p>Order Details:</p>
-<ul>
-    {% for item in order.items.all %}
-        <li>{{ item.project.title }} x{{ item.quantity }} - £{{ item.project.price|floatformat:2 }}</li>
-    {% endfor %}
-</ul>
+    <p><strong>Order Details:</strong></p>
+    <ul style="list-style-type: none; padding-left: 0;">
+        {% for item in order.items.all %}
+            <li style="padding: 5px 0;">
+                <strong>{{ item.project.title }}</strong> x{{ item.quantity }} - £{{ item.project.price|floatformat:2 }}
+            </li>
+        {% endfor %}
+    </ul>
 
-<p><strong>Total Price:</strong> £{{ order.total_price|floatformat:2 }}</p>
+    <p><strong>Total Price:</strong> £{{ order.total_price|floatformat:2 }}</p>
 
-<p>We will notify you once your order is processed. Thank you for shopping with us!</p>
+    <p>We will notify you once your order is processed. Thank you for shopping with us!</p>
+
+    <p style="color: #777;">This email was sent from Besieged Studios.</p>
+</body>
+</html>
