@@ -16,4 +16,4 @@ class CustomLogoutView(AllauthLogoutView):
 
 
 class CustomConfirmEmailView(ConfirmEmailView):
-    template_name = 'allauth/account/confirm-email.html'
+    template_name = 'allauth/account/email-confirm.html'
