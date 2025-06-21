@@ -28,7 +28,7 @@ urlpatterns = [
     path('commissions/', include('commissions.urls', namespace='commissions')),
     path('dashboard/', include('dashboard.urls')),
     path('accounts/', include('allauth.urls')),
-    path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('user/', include('accounts.urls', namespace='accounts')),
     path('checkout/', include('checkout.urls', namespace='checkout')),
 ]
 
