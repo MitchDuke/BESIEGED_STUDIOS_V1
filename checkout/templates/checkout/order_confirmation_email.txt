@@ -1,0 +1,19 @@
+Order Confirmation - Besieged Studios
+
+Hi {{ order.full_name }},
+
+Thanks for your order! Your order number is: {{ order.id }}
+
+Delivery Address:
+{{ order.address }}
+
+Order Details:
+{% for item in order.items.all %}
+- {{ item.project.title }} x{{ item.quantity }} - £{{ item.project.price|floatformat:2 }}
+{% endfor %}
+
+Total Price: £{{ order.total_price|floatformat:2 }}
+
+We’ll notify you when your order is being processed.
+
+— Besieged Studios

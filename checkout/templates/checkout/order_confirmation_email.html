@@ -2,29 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation</title>
 </head>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;">
-    <h2 style="color: #333;">Your Order Confirmation</h2>
-    <p>Thank you for your order! Your order number is <strong>{{ order.id }}</strong>.</p>
+<body style="font-family: 'Noto Sans', sans-serif; padding: 40px; background-color: #f8f9fa; color: #212529;">
+    <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h2 style="color: #007bff; text-align: center;">🎉 Order Confirmation</h2>
 
-    <p><strong>Delivery Address:</strong></p>
-    <p style="font-style: italic;">{{ order.address }}</p>
+        <p style="font-size: 1.1rem;">Thank you for your order, {{ order.full_name }}!</p>
 
-    <p><strong>Order Details:</strong></p>
-    <ul style="list-style-type: none; padding-left: 0;">
-        {% for item in order.items.all %}
-            <li style="padding: 5px 0;">
-                <strong>{{ item.project.title }}</strong> x{{ item.quantity }} - £{{ item.project.price|floatformat:2 }}
-            </li>
-        {% endfor %}
-    </ul>
+        <p>Your order number is <strong>{{ order.id }}</strong>.</p>
 
-    <p><strong>Total Price:</strong> £{{ order.total_price|floatformat:2 }}</p>
+        <h4 style="margin-top: 30px; color: #007bff;">Delivery Address</h4>
+        <p style="font-style: italic;">{{ order.address }}</p>
 
-    <p>We will notify you once your order is processed. Thank you for shopping with us!</p>
+        <h4 style="margin-top: 30px; color: #007bff;">Order Details</h4>
+        <ul style="list-style-type: none; padding-left: 0;">
+            {% for item in order.items.all %}
+                <li style="padding: 5px 0;">
+                    <strong>{{ item.project.title }}</strong> x{{ item.quantity }} - £{{ item.project.price|floatformat:2 }}
+                </li>
+            {% endfor %}
+        </ul>
 
-    <p style="color: #777;">This email was sent from Besieged Studios.</p>
+        <p style="margin-top: 20px;"><strong>Total Price:</strong> £{{ order.total_price|floatformat:2 }}</p>
+
+        <p style="margin-top: 40px;">We’ll notify you once your order is being processed.</p>
+
+        <hr style="margin: 40px 0;">
+        <p style="text-align: center; color: #888;">This email was sent from <strong>Besieged Studios</strong>.</p>
+    </div>
 </body>
 </html>
