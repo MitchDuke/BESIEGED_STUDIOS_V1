@@ -4,7 +4,7 @@
 <div class="container my-5 text-center">
     <h2>Please Verify Your Email</h2>
     <p>We’ve sent a verification email to <strong>{{ email }}</strong>. Please check your inbox.</p>
-    <p>Didn’t get it? <a href="{% url 'accounts:resend_email' %}" class="btn btn-primary">Resend Confirmation Email</a>.</p>
+    <p>Didn’t get it? <a href="{% url 'accounts:public_resend_email' %}" class="btn btn-primary">Resend Confirmation Email</a>.</p>
     <p>If you continue to have issues, email us at <strong>support@besiegedstudios.com</strong>.</p>
 </div>
 {% endblock %}

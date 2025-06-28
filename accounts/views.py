@@ -1,27 +1,51 @@
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.urls import reverse
-from allauth.account.models import EmailAddress
-from allauth.account.utils import send_email_confirmation
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django.views import View
 from allauth.account.views import LogoutView as AllauthLogoutView
-from allauth.account.views import ConfirmEmailView
-from allauth.account.models import EmailConfirmation, EmailConfirmationHMAC
-from django.http import HttpResponseRedirect
 
 
+# Custom logout view to show success message
 class CustomLogoutView(AllauthLogoutView):
     template_name = "account/logout.html"
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-
-        list(messages.get_messages(request))
+        list(messages.get_messages(request))  # Clears any old messages
         messages.success(request, "You have been logged out successfully.")
-
         return response
+
+
+# --- Email Verification System (Commented Out for Future Use) ---
+"""
+from django.shortcuts import render
+from django.views.generic.edit import FormView
+from django import forms
+from allauth.account.models import EmailAddress, EmailConfirmation, EmailConfirmationHMAC
+from allauth.account.utils import send_email_confirmation
+from django.views import View
+from django.http import HttpResponseRedirect, Http404
+from allauth.account.views import ConfirmEmailView
+
+
+class EmailResendForm(forms.Form):
+    email = forms.EmailField(label="Your email address")
+
+
+class PublicResendEmailView(FormView):
+    template_name = "account/public_resend_email.html"
+    form_class = EmailResendForm
+    success_url = "/accounts/verification-sent/"
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        email_address = EmailAddress.objects.filter(email=email, verified=False).first()
+
+        if email_address:
+            send_email_confirmation(self.request, email_address.user)
+            messages.success(self.request, f"A confirmation email has been resent to {email}.")
+        else:
+            messages.info(self.request, "This email is already verified or not registered.")
+
+        return super().form_valid(form)
 
 
 class ResendEmailConfirmationView(View):
@@ -42,20 +66,24 @@ class ResendEmailConfirmationView(View):
 class CustomConfirmEmailView(ConfirmEmailView):
     template_name = 'account/email_confirm.html'
 
-    def get_object(self, queryset=None):
-        # Needed to support both HMAC and database-stored links
-        key = self.kwargs.get("key")
-        self.confirmation = EmailConfirmationHMAC.from_key(key)
-        if not self.confirmation:
-            self.confirmation = EmailConfirmation.objects.filter(key=key.lower()).first()
-        return self.confirmation
-
     def get(self, *args, **kwargs):
-        confirmation = self.get_object()
-        if confirmation:
-            confirmation.confirm(self.request)
-            return HttpResponseRedirect(self.get_redirect_url())
-        return super().get(*args, **kwargs)
+        self.object = self.get_object()
 
-    def get_redirect_url(self):
-        return reverse('account_login')
+        if not self.object:
+            raise Http404("Invalid confirmation key.")
+
+        self.object.confirm(self.request)  # Marks email as verified
+        return HttpResponseRedirect(self.get_redirect_url())
+
+    def get_object(self, queryset=None):
+        key = self.kwargs.get("key")
+        confirmation = EmailConfirmationHMAC.from_key(key)
+
+        if not confirmation:
+            try:
+                confirmation = EmailConfirmation.objects.get(key__iexact=key)
+            except EmailConfirmation.DoesNotExist:
+                confirmation = None
+
+        return confirmation
+"""

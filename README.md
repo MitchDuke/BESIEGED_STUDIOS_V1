@@ -74,6 +74,9 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
     - Authentication App:
       - Manages user registration, login, and profiles.
+      - Email Verification System
+        - The app includes a commented-out custom email verification flow using Django Allauth. It supports public resending of confirmation emails and customized
+          confirmation pages. This feature is disabled during submission to streamline access for assessment, but is fully scaffolded for future production use.
 
     - Admin Dashboard App:
       - Provides a management interface for the site owner.

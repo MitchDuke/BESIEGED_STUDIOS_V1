@@ -1,11 +1,17 @@
 from django.urls import path, include
-from .views import CustomLogoutView, ResendEmailConfirmationView, CustomConfirmEmailView
+from .views import CustomLogoutView
+# from .views import ResendEmailConfirmationView, CustomConfirmEmailView, PublicResendEmailView
 
 app_name = "accounts"
 
 urlpatterns = [
     path("logout/", CustomLogoutView.as_view(), name="account_logout"),
-    path("resend-confirmation/", ResendEmailConfirmationView.as_view(), name="resend_email"),
-    path("confirm-email/<key>/", CustomConfirmEmailView.as_view(), name="account_confirm_email"),
-    path("", include("allauth.urls")),  # Redirects to Allauth for login/register
+
+    # --- Email Verification Routes (Commented Out for Future Use) ---
+    # path("resend-confirmation/", ResendEmailConfirmationView.as_view(), name="resend_email"),
+    # path("confirm-email/<key>/", CustomConfirmEmailView.as_view(), name="account_confirm_email"),
+    # path("resend-verification/", PublicResendEmailView.as_view(), name="public_resend_email"),
+
+    # Allauth default auth URLs (login, register, password reset, etc.)
+    path("", include("allauth.urls")),
 ]
