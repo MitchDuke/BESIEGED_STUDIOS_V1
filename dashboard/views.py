@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from accounts.models import UserProfile
+from .forms import UserProfileForm
 from checkout.models import Order
 from commissions.models import CommissionQuote
 
@@ -29,3 +30,19 @@ def order_detail(request, order_id):
         return render(request, "dashboard/order_not_found.html")
 
     return render(request, "dashboard/order_detail.html", {"order": order})
+
+
+@login_required
+def edit_profile(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully.")
+            return redirect('dashboard:dashboard')
+    else:
+        form = UserProfileForm(instance=profile)
+
+    return render(request, 'dashboard/edit_profile.html', {'form': form})

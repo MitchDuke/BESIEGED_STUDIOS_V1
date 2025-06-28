@@ -260,3 +260,14 @@ By forking the GitHub Repository, you can make a copy of the original repository
   - Discord developer peers for feedback
 
 This project was submitted as part of Unit 4: Full Stack Frameworks with Django for the Level 5 Diploma in Web Application Development.
+
+
+### ✅ Final Submission Checklist
+
+| Task | Status |
+|------|--------|
+| Navigation links (ToC) working | ✅ |
+| Lighthouse screenshots added | ⬜ _(add if required)_ |
+| Wireframes or UX plan included (optional) | ⬜ |
+
+---

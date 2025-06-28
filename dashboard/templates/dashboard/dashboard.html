@@ -12,7 +12,7 @@
             <p><strong>Email:</strong> {{ user.email }}</p>
             <p><strong>Phone:</strong> {{ profile.phone_number|default:"Not set" }}</p>
             <p><strong>Address:</strong> {{ profile.address|linebreaksbr|default:"Not set" }}</p>
-            <a href="#" class="btn btn-sm btn-outline-primary disabled">Edit Profile (coming soon)</a>
+            <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-outline-primary">Edit Profile</a>
         </div>
 
         <!-- Orders -->
