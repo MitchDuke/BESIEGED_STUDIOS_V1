@@ -173,7 +173,7 @@ def checkout_success(request):
 
     if request.user.is_authenticated:
         messages.success(request, "Payment successful! Your order has been placed.")
-        return redirect('dashboard')  # Go to dashboard if logged in
+        return redirect('dashboard:dashboard')  # Go to dashboard if logged in
     else:
         return render(request, "checkout/success.html")
 

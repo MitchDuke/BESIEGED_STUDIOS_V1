@@ -13,11 +13,23 @@
             {{ form.phone_number }}
         </div>
         <div class="mb-3">
-            <label class="form-label">Address</label>
-            {{ form.address }}
+            <label class="form-label">Address Line 1</label>
+            {{ form.address_line1 }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Address Line 2</label>
+            {{ form.address_line2 }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">City</label>
+            {{ form.city }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Postcode</label>
+            {{ form.postcode }}
         </div>
         <button type="submit" class="btn btn-success">Save Changes</button>
-        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'dashboard:dashboard' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 {% endblock %}

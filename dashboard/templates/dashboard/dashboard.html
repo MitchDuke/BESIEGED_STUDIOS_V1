@@ -11,8 +11,13 @@
             <h4>Your Info</h4>
             <p><strong>Email:</strong> {{ user.email }}</p>
             <p><strong>Phone:</strong> {{ profile.phone_number|default:"Not set" }}</p>
-            <p><strong>Address:</strong> {{ profile.address|linebreaksbr|default:"Not set" }}</p>
-            <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-outline-primary">Edit Profile</a>
+            <p><strong>Address:</strong>
+                {{ profile.address_line1|default:"" }}<br>
+                {{ profile.address_line2|default:"" }}<br>
+                {{ profile.city|default:"" }}<br>
+                {{ profile.postcode|default:"" }}
+            </p>
+            <a href="{% url 'dashboard:edit_profile' %}" class="btn btn-sm btn-outline-primary">Edit Profile</a>
         </div>
 
         <!-- Orders -->
@@ -22,7 +27,7 @@
                 <ul class="list-group">
                     {% for order in orders %}
                         <li class="list-group-item">
-                            <a href="{% url 'order_detail' order.id %}">
+                            <a href="{% url 'dashboard:order_detail' order.id %}">
                                 Order #{{ order.id }} — {{ order.created_at|date:"SHORT_DATE_FORMAT" }}
                             </a>
                         </li>
