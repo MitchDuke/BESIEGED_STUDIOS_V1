@@ -3,7 +3,7 @@
 
 [ Live Project on Heroku](https://besieged-studios-ea457ee5d01e.herokuapp.com/)
 
----
+(<img src="D:\Documents\GitHub\BESIEGE_STUDIOS_V1\staticfiles\home\images\cover_image.png"> )
 
 ##  Table of Contents
 
