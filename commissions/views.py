@@ -119,7 +119,7 @@ def delete_commission(request, pk):
     commission = CommissionQuote.objects.get(pk=pk)
     if commission.user == request.user:
         commission.delete()
-    return redirect('dashboard')
+    return redirect('dashboard:dashboard')
 
 
 @login_required

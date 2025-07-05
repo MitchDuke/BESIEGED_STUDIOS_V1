@@ -176,11 +176,10 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 ### Validation
 
-  - **HTML/CSS**: W3C Validators
-  - **JS**: JSHint
-  - **Python**: PEP8 (flake8 used locally)
-  - **Forms**: Django `is_valid()` checks
-  - **Email**: Validated via Django forms and regex
+- **HTML**: Validated with [W3C HTML Validator](https://validator.w3.org/)
+- **CSS**: W3C CSS Validator shows no errors
+- **JS**: [JSHint](https://jshint.com/) confirms syntax validity
+- **Python**: flake8 run via `flake8 .` — no warnings or errors on commit
 
 ### Performance
 
@@ -197,6 +196,23 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 - Admin permission checks
 - Invalid payment scenario handling
 - Form validation edge cases
+
+#### User Registration
+- Valid email and password -> account created
+- Invalid email format -> shows validation error
+- Existing user login works correctly
+- Email confirmation bypassed for testing (`ACCOUNT_EMAIL_VERIFICATION = "none"`)
+
+#### Commission Form
+- Selecting “Squad” enables dynamic squad size input
+- Invalid file upload -> handled with form errors
+- Price updates correctly with selected options
+
+#### Checkout Flow
+- Basket summary correct on checkout page
+- Address saved to session before payment
+- Stripe redirects to success or cancel page correctly
+- Order email sent upon success (verified via console)
 
 ### Known Bugs
 
