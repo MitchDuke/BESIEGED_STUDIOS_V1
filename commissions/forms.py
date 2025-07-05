@@ -25,8 +25,8 @@ class CommissionQuoteForm(forms.ModelForm):
         )
 
         # Dynamically populate size_option choices based on category
-        if 'category' in self.data:
-            category = self.data.get('category')
+        category = self.data.get('category') or self.initial.get('category')
+        if category:
             self.fields['size_option'].choices = self.get_size_options(category)
 
     def get_size_options(self, category):

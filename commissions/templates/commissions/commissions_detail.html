@@ -27,7 +27,7 @@
     <hr>
     <a href="{% url 'commissions:delete_commission' commission.pk %}" class="btn btn-danger">Delete Commission</a>
     <a href="{% url 'dashboard:dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
-    {% if commission.staus == "ready" %}
+    {% if commission.status == "ready" %}
         <a href="{% url 'commissions:add_to_basket' commission.pk %}" class="btn btn-success">Add to Basket</a>
     {% else %}
         <a class="btn btn-success disabled">Quotation Pending</a>

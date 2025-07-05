@@ -49,13 +49,17 @@ def create_commission_quote(request):
                 size_uplift = 1.0  # Example: 100% uplift for "11 to 15 models"
             elif size_option == "16_20":
                 size_uplift = 1.5  # Example: 150% uplift for "16 to 20 models"
-            elif size_option == "21_plus" or size_option == "over_20cm" or size_option == "50cm":
+            elif size_option in ["21_plus", "over_20cm", "50cm"]:
                 # Handle case by case for large squads, models or terrain
                 size_uplift = 0.0  # Price is panding manual quote
                 price_status = 'pending'
             else:
                 price_status = 'ready'  # Default status for other sizes
             # Add other size options if required...
+
+            # Debugging output to check values
+            print(f"[DEBUG] Size Option: {size_option}, Status: {price_status}, Uplift: {size_uplift}")
+            print(f"[CHECK] Cleaned Size Option: '{form.cleaned_data.get('size_option')}'")
 
             # Apply the size uplift percentage
             uplift_amount = base_price * size_uplift
