@@ -3,7 +3,7 @@
 
 [ Live Project on Heroku](https://besieged-studios-ea457ee5d01e.herokuapp.com/)
 
-<img src="staticfiles\home\images\cover_image.png">
+<img src="staticfiles\home\images\readme\cover_image.png" style="width: 75%">
 
 ##  Table of Contents
 
@@ -21,6 +21,11 @@
     - [Validation](#validation)
     - [Performance](#performance)
     - [Manual Testing](#manual-testing)
+      - [User Registration](#User-Registration)
+      - [Commission Form](#Commission-Form)
+      - [Gallery Flow](#gallery-flow)
+      - [Checkout Flow](#Checkout-Flow)
+      - [Dashboard](#dashboard)
     - [Known Bugs](#known-bugs)
 7. [Further Improvements](#further-improvements)
 8. [Deployment](#deployment)
@@ -97,6 +102,8 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
     - Include optional add-ons (e.g., custom bases, weathering effects) that dynamically update the quote.
 
 ##  Project Structure
+
+<img src="staticfiles\home\images\readme\site_flow.png">
 
   - Apps
 
@@ -199,20 +206,47 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 #### User Registration
 - Valid email and password -> account created
+  - <img src="staticfiles\home\images\readme\register.png" style="width: 75%">
+  - <img src="staticfiles\home\images\readme\login.png" style="width: 75%">
+  - <img src="staticfiles\home\images\readme\logout.png" style="width: 75%">
 - Invalid email format -> shows validation error
+  - <img src="staticfiles\home\images\readme\invalid_email.png" style="width: 75%">
 - Existing user login works correctly
-- Email confirmation bypassed for testing (`ACCOUNT_EMAIL_VERIFICATION = "none"`)
+  - <img src="staticfiles\home\images\readme\signed_in.png" style="width: 75%">
+- Email confirmation bypassed for testing to be applied at a later stage (`ACCOUNT_EMAIL_VERIFICATION = "none"`)
 
 #### Commission Form
 - Selecting “Squad” enables dynamic squad size input
-- Invalid file upload -> handled with form errors
-- Price updates correctly with selected options
+  - <img src="staticfiles\home\images\readme\commission_quote.png" style="width: 75%">
+  - <img src="staticfiles\home\images\readme\commissions_category.png" style="width: 75%">
+  - <img src="staticfiles\home\images\readme\commissions_size_select.png" style="width: 75%">
+- Invalid file upload (to be added at a later stage with form errors)
+- Price updates correctly with selected options to produce quote which can be sent to the basket
+  - <img src="staticfiles\home\images\readme\commission_quote.png" style="width: 75%">
+  - <img src="staticfiles\home\images\readme\commission_quote_pending.png" style="width: 75%">
+
+#### Gallery Flow
 
 #### Checkout Flow
 - Basket summary correct on checkout page
-- Address saved to session before payment
+  - <img src="staticfiles\home\images\readme\basket.png" style="width: 75%">
+- Address saved to session before payment (use saved address feature to be added)
+  - <img src="staticfiles\home\images\readme\checkout.png" style="width: 75%">
 - Stripe redirects to success or cancel page correctly
+  - <img src="staticfiles\home\images\readme\payment.png" style="width: 75%">
+  - <img src="staticfiles\home\images\readme\payment_successful.png" style="width: 75%">
+  - <img src="staticfiles\home\images\readme\payment_declined.png" style="width: 75%">
+  - <img src="staticfiles\home\images\readme\payment_cancelled.png" style="width: 75%">
 - Order email sent upon success (verified via console)
+  - <img src="staticfiles\home\images\readme\order_confirmation.png" style="width: 75%">
+
+#### Dashboard
+  - Access quoted commissions
+    - <img src="staticfiles\home\images\readme\dashboard.png" style="width: 75%">
+  - View previous orders(order again feature to be added)
+    - <img src="staticfiles\home\images\readme\previous_order.png" style="width: 75%">
+  - Edit contact details
+    - <img src="staticfiles\home\images\readme\edit_details.png" style="width: 75%">
 
 ### Known Bugs
 
@@ -226,8 +260,6 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - Add gallery filters for tags, paint level, etc.
   - Pagination for dashboard and gallery
   - Implement profile avatars
-
-
 
 ## Deployment
 
@@ -284,6 +316,5 @@ This project was submitted as part of Unit 4: Full Stack Frameworks with Django 
 |------|--------|
 | Navigation links (ToC) working | ✅ |
 | Lighthouse screenshots added | ⬜ _(add if required)_ |
-| Wireframes or UX plan included (optional) | ⬜ |
 
 ---
