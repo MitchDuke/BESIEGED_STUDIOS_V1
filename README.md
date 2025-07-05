@@ -3,7 +3,7 @@
 
 [ Live Project on Heroku](https://besieged-studios-ea457ee5d01e.herokuapp.com/)
 
-<img src="staticfiles\home\images\readme\cover_image.png" style="width: 75%">
+<img src="staticfiles/home/images/readme/cover_image.png" style="width: 75%">
 
 ##  Table of Contents
 
@@ -20,6 +20,10 @@
     - [Bootsrap](#Bootstrap)
     - [Validation](#validation)
     - [Performance](#performance)
+      - [Home page](#Home-page)
+      - [Gallery](#gallery)
+      - [Dashboard](#dashboard)
+      - [Commissions](#commissions)
     - [Manual Testing](#manual-testing)
       - [User Registration](#User-Registration)
       - [Commission Form](#Commission-Form)
@@ -103,7 +107,7 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 ##  Project Structure
 
-<img src="staticfiles\home\images\readme\site_flow.png">
+<img src="staticfiles/home/images/readme/site_flow.png">
 
   - Apps
 
@@ -192,10 +196,34 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 [Google Lighthouse](https://developers.google.com/web/tools/lighthouse):
 
-  - Performance: 90+
-  - Accessibility: 98
-  - Best Practices: 100
-  - SEO: 100
+#### Home page
+    
+  - Desktop
+    - <img src="staticfiles/home/images/readme/home_lighthouse.png" alt="home lighthouse desktop">
+  - Mobile
+    - <img src="staticfiles/home/images/readme/home_lighthouse_mobile.png" alt="home lighthouse mobile">
+
+#### Gallery
+
+  - Desktop
+    - <img src="staticfiles/home/images/readme/gallery_lighthouse.png" alt="gallery lighthose desktop">
+  - Mobile
+    - <img src="staticfiles/home/images/readme/gallery_lighthouse_mobile.png" alt="gallery lighthouse mobile">
+
+#### Dashboard
+
+  - Desktop
+    - <img src="staticfiles/home/images/readme/dashboard_lighthouse.png" alt="dashboard lighthouse desktop">
+  - Mobile
+    - <img src="staticfiles/home/images/readme/dashboard_lighthouse_mobile.png" alt="dashboard lighthouse mobile">
+
+#### Commissions
+
+  - Desktop
+    - <img src="staticfiles/home/images/readme/commission_detail_lighthouse.png" alt="commission detail lighthouse desktop">
+  - Mobile
+    - <img src="staticfiles/home/images/readme/commission_detail_lighthouse_mobile.png" alt="commission detail lighthouse mobile">
+
 
 ### Manual Testing
 
@@ -206,60 +234,62 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 #### User Registration
 - Valid email and password -> account created
-  - <img src="staticfiles\home\images\readme\register.png" style="width: 75%">
-  - <img src="staticfiles\home\images\readme\login.png" style="width: 75%">
-  - <img src="staticfiles\home\images\readme\logout.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/register.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/login.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/logout.png" style="width: 75%">
 - Invalid email format -> shows validation error
-  - <img src="staticfiles\home\images\readme\invalid_email.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/invalid_email.png" style="width: 75%">
 - Existing user login works correctly
-  - <img src="staticfiles\home\images\readme\signed_in.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/signed_in.png" style="width: 75%">
 - Email confirmation bypassed for testing to be applied at a later stage (`ACCOUNT_EMAIL_VERIFICATION = "none"`)
 
 #### Commission Form
 - Selecting “Squad” enables dynamic squad size input
-  - <img src="staticfiles\home\images\readme\commission_quote.png" style="width: 75%">
-  - <img src="staticfiles\home\images\readme\commissions_category.png" style="width: 75%">
-  - <img src="staticfiles\home\images\readme\commissions_size_select.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/commission_quote.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/commissions_category.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/commissions_size_select.png" style="width: 75%">
 - Invalid file upload (to be added at a later stage with form errors)
 - Price updates correctly with selected options to produce quote which can be sent to the basket
-  - <img src="staticfiles\home\images\readme\commission_quote.png" style="width: 75%">
-  - <img src="staticfiles\home\images\readme\commission_quote_pending.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/commission_quote.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/commission_quote_pending.png" style="width: 75%">
 
 #### Gallery Flow
 
 #### Checkout Flow
 - Basket summary correct on checkout page
-  - <img src="staticfiles\home\images\readme\basket.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/basket.png" style="width: 75%">
 - Address saved to session before payment (use saved address feature to be added)
-  - <img src="staticfiles\home\images\readme\checkout.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/checkout.png" style="width: 75%">
 - Stripe redirects to success or cancel page correctly
-  - <img src="staticfiles\home\images\readme\payment.png" style="width: 75%">
-  - <img src="staticfiles\home\images\readme\payment_successful.png" style="width: 75%">
-  - <img src="staticfiles\home\images\readme\payment_declined.png" style="width: 75%">
-  - <img src="staticfiles\home\images\readme\payment_cancelled.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/payment.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/payment_successful.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/payment_declined.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/payment_cancelled.png" style="width: 75%">
 - Order email sent upon success (verified via console)
-  - <img src="staticfiles\home\images\readme\order_confirmation.png" style="width: 75%">
+  - <img src="staticfiles/home/images/readme/order_confirmation.png" style="width: 75%">
 
 #### Dashboard
   - Access quoted commissions
-    - <img src="staticfiles\home\images\readme\dashboard.png" style="width: 75%">
+    - <img src="staticfiles/home/images/readme/dashboard.png" style="width: 75%">
   - View previous orders(order again feature to be added)
-    - <img src="staticfiles\home\images\readme\previous_order.png" style="width: 75%">
+    - <img src="staticfiles/home/images/readme/previous_order.png" style="width: 75%">
   - Edit contact details
-    - <img src="staticfiles\home\images\readme\edit_details.png" style="width: 75%">
+    - <img src="staticfiles/home/images/readme/edit_details.png" style="width: 75%">
 
 ### Known Bugs
 
   - Email verification was causing a redirect loop (disabled via `ACCOUNT_EMAIL_VERIFICATION = "none"` during assessment).
+  - When altering the value of copmmission items in the basket dropdown the site throws a page 404 error. You wouldn't normally ask for more than one but it is
+    something that requires attention should this be used in a production envronment.
   - Bootstrap alert styles sometimes require inline overrides due to specificity.
 
 ## Further Improvements
 
   - Enable custom email verification flow for production
   - Allow users to edit their orders pre-payment
+  - Add use of saved addresses to speed up checkout
   - Add gallery filters for tags, paint level, etc.
   - Pagination for dashboard and gallery
-  - Implement profile avatars
 
 ## Deployment
 
