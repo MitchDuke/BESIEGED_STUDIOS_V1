@@ -91,8 +91,6 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - Order Management (Admin Dashboard):
     - Allow the site owner to manage orders:
     - View and update order status (e.g., "Pending", "In Progress", "Completed").
-    - Upload photos of the completed miniature for client review.
-    - Approve or reject client requests for revisions.
 
   - Feedback Mechanism:
     - Allow clients to accept the finished miniature or request minor adjustments.
@@ -254,6 +252,12 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - <img src="staticfiles/home/images/readme/commission_quote_pending.png" style="width: 75%">
 
 #### Gallery Flow
+- Selecting an item from the gallery
+  - <img src="staticfiles/home/images/readme/gallery.png">
+- Sending an item to the basket
+  - <img src="staticfiles/home/images/readme/gallery_saved_to_basket.png">
+- Item is saved to the basket and ready to checkout
+  - <img src="staticfiles/home/images/readme/gallery_items_in_basket.png">
 
 #### Checkout Flow
 - Basket summary correct on checkout page
@@ -289,7 +293,9 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - Allow users to edit their orders pre-payment
   - Add use of saved addresses to speed up checkout
   - Add gallery filters for tags, paint level, etc.
-  - Pagination for dashboard and gallery
+  - Upload photos of the completed miniature for client review.
+  - Approve or reject client requests for revisions.
+  - Overall visual improvements
 
 ## Deployment
 
