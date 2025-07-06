@@ -5,7 +5,7 @@
 
 <img src="staticfiles/home/images/readme/cover_image.png" style="width: 75%">
 
-##  <h2>Table of Contents<h2>
+##  Table of Contents
 
 1. [Project Concept](#project-concept)
 2. [User Experience (UX)](#user-experience-ux)
@@ -17,8 +17,12 @@
 6. [Testing](#testing)
     - [Emails](#emails)
     - [Stripe Payments](#stripe)
-    - [Bootsrap](#Bootstrap)
+    - [Bootstrap](#Bootstrap)
     - [Validation](#validation)
+      - [HTML](#html-validated-with-w3c-html-validator)
+      - [CSS](#css-w3c-css-validator)
+      - [JS](#js-jshint-confirms-syntax-validity)
+      - [PYTHON](#python-httpspep8ciherokuappcom-)
     - [Performance](#performance)
       - [Home page](#Home-page)
       - [Gallery](#gallery)
@@ -155,7 +159,6 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - [PostgreSQL](https://www.postgresql.org/)
   - [Bootstrap 5](https://getbootstrap.com/)
   - [Stripe](https://stripe.com/)
-  - [Font Awesome](https://fontawesome.com/)
   - [Allauth](https://django-allauth.readthedocs.io/)
   - [Whitenoise](http://whitenoise.evans.io/)
   - [Gunicorn](https://gunicorn.org/) – for Heroku
@@ -185,30 +188,83 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 ### Validation
 
-  - **HTML**: Validated with [W3C HTML Validator](https://validator.w3.org/)
-    - Home
-      - <img src="staticfiles/home/images/readme/home_validation.png" style="width: 800px" alt="Home validation">
-    - Gallery
-      - <img src="staticfiles/home/images/readme/gallery_validation.png" style="width: 800px" alt="Gallery validation">
-    - Commissions
-      - <img src="staticfiles/home/images/readme/commissions_validation.png" style="width: 800px" alt="Commissions validation">
-      - <img src="staticfiles/home/images/readme/commissions_detail_validation.png" style="width: 800px" alt="Commissions details validation">
-    - Dashboard
-      - <img src="staticfiles/home/images/readme/dashboard_validation.png" style="width: 800px" alt="Dashboard validation">
-    - Checkout
-      - <img src="staticfiles/home/images/readme/checkout_validation.png" style="width: 800px" alt="Checkout validation">
-    - Conclusion
-      - All rendered HTML pages were passed through the W3C HTML Validator for markup correctness. The following points were noted:
-        - Pages pass validation once Django template tags are rendered out.
-        - Minor parse errors were reported around:
-          - Use of arrow functions (=>) in JavaScript (modern and valid)
-          - Encoded characters like &#x27; representing '
-        - These are false positives and donnot affect the browser rendering or accessibility.
+#### **HTML**: Validated with [W3C HTML Validator](https://validator.w3.org/)
+  - Home
+    - <img src="staticfiles/home/images/readme/home_validation.png" style="width: 800px" alt="Home validation">
+  - Gallery
+    - <img src="staticfiles/home/images/readme/gallery_validation.png" style="width: 800px" alt="Gallery validation">
+  - Commissions
+    - <img src="staticfiles/home/images/readme/commissions_validation.png" style="width: 800px" alt="Commissions validation">
+    - <img src="staticfiles/home/images/readme/commissions_detail_validation.png" style="width: 800px" alt="Commissions details validation">
+  - Dashboard
+    - <img src="staticfiles/home/images/readme/dashboard_validation.png" style="width: 800px" alt="Dashboard validation">
+  - Checkout
+    - <img src="staticfiles/home/images/readme/checkout_validation.png" style="width: 800px" alt="Checkout validation">
+  - Conclusion
+    - All rendered HTML pages were passed through the W3C HTML Validator for markup correctness. The following points were noted:
+      - Pages pass validation once Django template tags are rendered out.
+      - Minor parse errors were reported around:
+        - Use of arrow functions (=>) in JavaScript (modern and valid)
+        - Encoded characters like &#x27; representing '
+      - These are false positives and do not affect the browser rendering or accessibility.
 
-  - **CSS**: W3C CSS Validator shows no errors
-    
-- **JS**: [JSHint](https://jshint.com/) confirms syntax validity
-- **Python**: flake8 run via `flake8 .` — no warnings or errors on commit
+#### **CSS**: W3C CSS Validator
+  - Base CSS
+    - <img src="staticfiles/home/images/readme/base_css_validation.png" style="width: 800px" alt="Base CSS validation">
+  - Conclusion
+    - No errors shown
+    - One warning where Imported style sheets are not checked in direct input and file upload modes of the validator
+
+#### **JS**: [JSHint](https://jshint.com/) confirms syntax validity
+  - Commissions
+    - <img src="staticfiles/home/images/readme/commissions_script_validation.png" style="width: 800px" alt="Commissions script validation">
+  - Conclusion
+    - JSHint warnings were shown for use of modern JavaScript (ES6), such as const and =>. These were resolved by configuring the validator to support ES6 using /*
+      jshint esversion: 6 */. 
+    - Otherwise no errors were found.
+
+#### **Python**: (https://pep8ci.herokuapp.com/) — 
+  - Accounts
+    - <img src="staticfiles/home/images/readme/python_accounts_admin.png" style="width: 800px" alt="Accounts Admin Validation">
+    - <img src="staticfiles/home/images/readme/python_accounts_forms.png" style="width: 800px" alt="Accounts forms Validation">
+    - <img src="staticfiles/home/images/readme/python_accounts_models.png" style="width: 800px" alt="Accounts models Validation">
+    - <img src="staticfiles/home/images/readme/python_accounts_signals.png" style="width: 800px" alt="Accounts signals Validation">
+    - <img src="staticfiles/home/images/readme/python_accounts_urls.png" style="width: 800px" alt="Accounts urls Validation">
+    - <img src="staticfiles/home/images/readme/python_accounts_views.png" style="width: 800px" alt="Accounts views Validation">
+  - Basket
+    - <img src="staticfiles/home/images/readme/python_basket_context_processor.png" style="width: 800px" alt="Basket Context processor Validation">
+    - <img src="staticfiles/home/images/readme/python_basket_urls.png" style="width: 800px" alt="Basket urls Validation">
+    - <img src="staticfiles/home/images/readme/python_basket_views.png" style="width: 800px" alt="Basket views Validation">
+  - Checkout
+    - <img src="staticfiles/home/images/readme/python_checkout_models.png" style="width: 800px" alt="Checkout models Validation">
+    - <img src="staticfiles/home/images/readme/python_checkout_urls.png" style="width: 800px" alt="Checkout urls Validation">
+    - <img src="staticfiles/home/images/readme/python_checkout_views.png" style="width: 800px" alt="Checkout views Validation">
+    - <img src="staticfiles/home/images/readme/python_checkout_webhooks.png" style="width: 800px" alt="Checkout webhooks Validation">
+  - Commissions
+    - <img src="staticfiles/home/images/readme/python_commissions_views.png" style="width: 800px" alt="Commissions views Validation">
+    - <img src="staticfiles/home/images/readme/python_commissions_models.png" style="width: 800px" alt="Commissions models Validation">
+    - <img src="staticfiles/home/images/readme/python_commissions_urls.png" style="width: 800px" alt="Commissions urls Validation">
+    - <img src="staticfiles/home/images/readme/python_commissions_forms.png" style="width: 800px" alt="Commissions forms Validation">
+  - Dashboard
+    - <img src="staticfiles/home/images/readme/python_dashboard_urls.png" style="width: 800px" alt="Dashboard urls Validation">
+    - <img src="staticfiles/home/images/readme/python_dashboard_forms.png" style="width: 800px" alt="Dashboard forms Validation">
+    - <img src="staticfiles/home/images/readme/python_dashboard_views.png" style="width: 800px" alt="Dashboard views Validation">
+  - Gallery
+    - <img src="staticfiles/home/images/readme/python_gallery_models.png" style="width: 800px" alt="Gallery models Validation">
+    - <img src="staticfiles/home/images/readme/python_gallery_urls.png" style="width: 800px" alt="Gallery urls Validation">
+    - <img src="staticfiles/home/images/readme/python_gallery_views.png" style="width: 800px" alt="Gallery views Validation">
+  - Home
+    - <img src="staticfiles/home/images/readme/python_home_urls.png" style="width: 800px" alt="Home urls Validation">
+    - <img src="staticfiles/home/images/readme/python_home_views.png" style="width: 800px" alt="Home views Validation">
+  - Besieged Studios
+    - <img src="staticfiles/home/images/readme/python_project_settings.png" style="width: 800px" alt="Project settings Validation">
+    - <img src="staticfiles/home/images/readme/python_project_urls.png" style="width: 800px" alt="Project urlss Validation">
+  - Conclusion
+    - Python files were validated using flake8.
+      - All errors were fixed, except for E501 (line too long), which remains on a small number of lines where:
+        - URLs, redirects, or path strings would become unreadable if broken.
+        - The line is still within 100–120 characters and readable.
+      - The Code conforms to clean code practices with descriptive names, consistent indentation, and logical organization.
 
 ### Performance
 
@@ -241,7 +297,6 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
     - <img src="staticfiles/home/images/readme/commission_detail_lighthouse.png" alt="commission detail lighthouse desktop">
   - Mobile
     - <img src="staticfiles/home/images/readme/commission_detail_lighthouse_mobile.png" alt="commission detail lighthouse mobile">
-
 
 ### Manual Testing
 
@@ -303,8 +358,8 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 ### Known Bugs
 
   - Email verification was causing a redirect loop (disabled via `ACCOUNT_EMAIL_VERIFICATION = "none"` during assessment).
-  - When altering the value of copmmission items in the basket dropdown the site throws a page 404 error. You wouldn't normally ask for more than one but it is
-    something that requires attention should this be used in a production envronment.
+  - When altering the value of commission items in the basket dropdown the site throws a page 404 error. You wouldn't normally ask for more than one but it is
+    something that requires attention should this be used in a production environment.
   - Bootstrap alert styles sometimes require inline overrides due to specificity.
 
 ## Further Improvements
@@ -327,7 +382,7 @@ The project was deployed to Heroku using the following steps:
     - `heroku create`
 2. Push the repository to Heroku:
     - `git push heroku master`
-3. Set up the necessary environment variables on Heroku for the MongoDB connection.
+3. Set up the necessary environment variables on Heroku, including database URL (PostgreSQL), secret keys, and Stripe keys.
 
 ### Forking the GitHub Repository
 
@@ -356,21 +411,12 @@ By forking the GitHub Repository, you can make a copy of the original repository
 
 ### Media
   - All photos belong to the site owner unless stated otherwise
-  - Images generated using OpenAI ChatGPT
+  - Home page images generated using OpenAI ChatGPT
 
 ### Acknowledgements
   - Code Institute mentors
+  - College of Bristol Tutor support
   - My family and friends for testing
   - Discord developer peers for feedback
 
 This project was submitted as part of Unit 4: Full Stack Frameworks with Django for the Level 5 Diploma in Web Application Development.
-
-
-### ✅ Final Submission Checklist
-
-| Task | Status |
-|------|--------|
-| Navigation links (ToC) working | ✅ |
-| Lighthouse screenshots added | ⬜ _(add if required)_ |
-
----

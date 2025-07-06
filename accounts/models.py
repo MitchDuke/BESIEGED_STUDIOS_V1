@@ -13,7 +13,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
-
     def full_address(self):
         parts = [
             self.address_line1,

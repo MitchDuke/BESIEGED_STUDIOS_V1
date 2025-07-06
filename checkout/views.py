@@ -32,7 +32,7 @@ def checkout(request):
             try:
                 commission = CommissionQuote.objects.get(pk=int(pk))  # Try to get a CommissionQuote
                 basket_items.append({
-                    "project": commission, 
+                    "project": commission,
                     "quantity": quantity,
                     "total_price": commission.total_price * quantity,
                     "is_commission": True
@@ -143,7 +143,7 @@ def checkout_success(request):
         )
 
         # Create OrderItems for each item in the basket
-        total_price = 0 # Initialize total price for the order
+        total_price = 0  # Initialize total price for the order
         for pk, qty in basket.items():
             try:
                 project = Project.objects.get(pk=int(pk))
@@ -169,7 +169,7 @@ def checkout_success(request):
 
     # Clean up checkout details from session
     for key in ["full_name", "email", "address", "stripe_session_id"]:
-        request.session.pop(key,None)
+        request.session.pop(key, None)
 
     if request.user.is_authenticated:
         messages.success(request, "Payment successful! Your order has been placed.")

@@ -123,8 +123,8 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/' # Redirect after login
-LOGOUT_REDIRECT_URL = '/' # Redirect after logout
+LOGIN_REDIRECT_URL = '/'  # Redirect after login
+LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 ACCOUNT_LOGOUT_MESSAGE = ""
 ACCOUNT_EMAIL_VERIFICATION = "none"  # email verification disabled for now
 ACCOUNT_EMAIL_REQUIRED = True
