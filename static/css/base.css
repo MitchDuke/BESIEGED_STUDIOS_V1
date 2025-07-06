@@ -80,3 +80,19 @@ nav ul li a {
 .image-button:hover {
     background-color: #0056b3;
 }
+
+/* Checkout Styling */
+
+.checkout-input {
+    align-self: flex-start;
+    width: 50%;
+}
+
+/* Styling for images in mobile displays */
+
+@media (max-width: 768px) {
+  img {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}

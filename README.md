@@ -5,7 +5,7 @@
 
 <img src="staticfiles/home/images/readme/cover_image.png" style="width: 75%">
 
-##  Table of Contents
+##  <h2>Table of Contents<h2>
 
 1. [Project Concept](#project-concept)
 2. [User Experience (UX)](#user-experience-ux)
@@ -107,39 +107,39 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 <img src="staticfiles/home/images/readme/site_flow.png">
 
-  - Apps
+### Apps
 
-    - Gallery App:
-      - Manages the display of completed works and testimonials.
+  - Gallery App:
+    - Manages the display of completed works and testimonials.
 
-    - Commission App:
-      - Handles commission requests, orders, and payments.
-        - Select Category:
-          - Single Miniature
-          - Squad
-          - Colossal Monster/Vehicle
-          - Terrain
+  - Commission App:
+    - Handles commission requests, orders, and payments.
+      - Select Category:
+        - Single Miniature
+        - Squad
+        - Colossal Monster/Vehicle
+        - Terrain
 
-      - Select Sub-options (dynamic form inputs):
-          - For Squad: choose squad size
-          - For Terrain: choose max dimension
-          - Case-by-case flag if special size exceeds limit
+    - Select Sub-options (dynamic form inputs):
+        - For Squad: choose squad size
+        - For Terrain: choose max dimension
+        - Case-by-case flag if special size exceeds limit
 
-      - Auto-calculate Base Price + Assembly/Priming %
-      - Upload Image (optional)
-      - Add Notes / Requirements
-      - Show Price or Flag for Manual Quote
-      - Submit to Dashboard:
-        - Status = "Ready to Checkout" or "Pending Quote"
+    - Auto-calculate Base Price + Assembly/Priming %
+    - Upload Image (optional)
+    - Add Notes / Requirements
+    - Show Price or Flag for Manual Quote
+    - Submit to Dashboard:
+      - Status = "Ready to Checkout" or "Pending Quote"
 
-    - Authentication App:
-      - Manages user registration, login, and profiles.
-      - Email Verification System
-        - The app includes a commented-out custom email verification flow using Django Allauth. It supports public resending of confirmation emails and customized
-          confirmation pages. This feature is disabled during submission to streamline access for assessment, but is fully scaffolded for future production use.
+  - Authentication App:
+    - Manages user registration, login, and profiles.
+    - Email Verification System
+      - The app includes a commented-out custom email verification flow using Django Allauth. It supports public resending of confirmation emails and customized
+        confirmation pages. This feature is disabled during submission to streamline access for assessment, but is fully scaffolded for future production use.
 
-    - Admin Dashboard App:
-      - Provides a management interface for the site owner.
+  - Admin Dashboard App:
+    - Provides a management interface for the site owner.
 
 ##  Technologies Used
 
@@ -170,13 +170,13 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - Commission quotation pending email
 
 ###  Stripe:
-    - Used official [Stripe test cards](https://stripe.com/docs/testing):
-    - To test the Stripe payment system the following test scenarios were used:
-      - Successful payment Card Number: 4242 4242 4242 4242
-      - Failed payment Card Number: 4000 0000 0000 0002 (Declined payment)
-      - Authentication Required (3D Secure) Card Number: 4000 0025 0000 3155 (Requires extra authentication)
-      - Insufficient Funds Card Number: 4000 0000 0000 9995
-    - Using the above card numbers, any future expiry date, any 3 digit CVC number and a valid postcode.
+  - Used official [Stripe test cards](https://stripe.com/docs/testing):
+  - To test the Stripe payment system the following test scenarios were used:
+    - Successful payment Card Number: 4242 4242 4242 4242
+    - Failed payment Card Number: 4000 0000 0000 0002 (Declined payment)
+    - Authentication Required (3D Secure) Card Number: 4000 0025 0000 3155 (Requires extra authentication)
+    - Insufficient Funds Card Number: 4000 0000 0000 9995
+  - Using the above card numbers, any future expiry date, any 3 digit CVC number and a valid postcode.
 
 ###  Bootstrap
   - Alerts:
@@ -185,8 +185,28 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
 ### Validation
 
-- **HTML**: Validated with [W3C HTML Validator](https://validator.w3.org/)
-- **CSS**: W3C CSS Validator shows no errors
+  - **HTML**: Validated with [W3C HTML Validator](https://validator.w3.org/)
+    - Home
+      - <img src="staticfiles/home/images/readme/home_validation.png" style="width: 800px" alt="Home validation">
+    - Gallery
+      - <img src="staticfiles/home/images/readme/gallery_validation.png" style="width: 800px" alt="Gallery validation">
+    - Commissions
+      - <img src="staticfiles/home/images/readme/commissions_validation.png" style="width: 800px" alt="Commissions validation">
+      - <img src="staticfiles/home/images/readme/commissions_detail_validation.png" style="width: 800px" alt="Commissions details validation">
+    - Dashboard
+      - <img src="staticfiles/home/images/readme/dashboard_validation.png" style="width: 800px" alt="Dashboard validation">
+    - Checkout
+      - <img src="staticfiles/home/images/readme/checkout_validation.png" style="width: 800px" alt="Checkout validation">
+    - Conclusion
+      - All rendered HTML pages were passed through the W3C HTML Validator for markup correctness. The following points were noted:
+        - Pages pass validation once Django template tags are rendered out.
+        - Minor parse errors were reported around:
+          - Use of arrow functions (=>) in JavaScript (modern and valid)
+          - Encoded characters like &#x27; representing '
+        - These are false positives and donnot affect the browser rendering or accessibility.
+
+  - **CSS**: W3C CSS Validator shows no errors
+    
 - **JS**: [JSHint](https://jshint.com/) confirms syntax validity
 - **Python**: flake8 run via `flake8 .` — no warnings or errors on commit
 
