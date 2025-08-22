@@ -411,6 +411,7 @@ By forking the GitHub Repository, you can make a copy of the original repository
 
 ### Media
   - All photos belong to the site owner unless stated otherwise
+  - All Gallery images are taken from my personal collection
   - Home page images generated using OpenAI ChatGPT
 
 ### Acknowledgements
