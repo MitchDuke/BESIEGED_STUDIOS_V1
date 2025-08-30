@@ -37,7 +37,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 SECRET_KEY = "django-insecure-)v#gd0g7$jji6t#6%q&t!+k!uqe47ud$$u54iac=8s6355-r75"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Heroku settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
