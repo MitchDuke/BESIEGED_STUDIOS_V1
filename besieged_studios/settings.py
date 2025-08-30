@@ -198,7 +198,7 @@ else:
 
 if os.environ.get('USE_AWS') == 'True':
     # Custom file storage class using S3
-    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    DEFAULT_FILE_STORAGE = 'besieged_studios.custom_storages.MediaStorage'
 
     # AWS S3 credentials and settings
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
@@ -209,9 +209,13 @@ if os.environ.get('USE_AWS') == 'True':
     # Used for better S3 URLs
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-    # Media files settings
+    AWS_QUERYSTRING_AUTH = False        # cleaner public URLs
+    AWS_DEFAULT_ACL = None              # let bucket policy handle ACLs
+    AWS_S3_FILE_OVERWRITE = False       # don't overwrite same-name files
+
+    # Put uploads under "media/" in your bucket
     AWS_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 
-    # MEDIA_ROOT should not be used with S3
+    # No local MEDIA_ROOT when using S3
     MEDIA_ROOT = None
