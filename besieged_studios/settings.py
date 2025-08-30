@@ -198,7 +198,7 @@ else:
 
 if os.environ.get('USE_AWS') == 'True':
     # Custom file storage class using S3
-    DEFAULT_FILE_STORAGE = 'besieged_studios.custom_storages.MediaStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     # AWS S3 credentials and settings
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
