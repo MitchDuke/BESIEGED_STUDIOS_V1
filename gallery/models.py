@@ -12,7 +12,7 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     category = models.ManyToManyField(Category)
-    image = models.ImageField(upload_to='gallery/images/')
+    image = models.ImageField(upload_to='gallery/images/', storage=MediaStorage())
     is_featured = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 

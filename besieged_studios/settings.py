@@ -216,6 +216,3 @@ if os.environ.get('USE_AWS') == 'True':
     # Put uploads under "media/" in your bucket
     AWS_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-
-    # No local MEDIA_ROOT when using S3
-    MEDIA_ROOT = None
