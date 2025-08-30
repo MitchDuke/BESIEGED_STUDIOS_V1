@@ -197,15 +197,21 @@ else:
     DEFAULT_FROM_EMAIL = f"Besieged Studios <{EMAIL_HOST_USER}>"
 
 if os.environ.get('USE_AWS') == 'True':
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # Custom file storage class using S3
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
+    # AWS S3 credentials and settings
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
+    # Used for better S3 URLs
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-    # Override media settings for AWS S3
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    # Media files settings
+    AWS_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+
+    # MEDIA_ROOT should not be used with S3
     MEDIA_ROOT = None
