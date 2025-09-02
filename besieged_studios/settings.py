@@ -200,13 +200,28 @@ else:
 
 # Django 5 storage config
 # Use Cloudinary for MEDIA only; WhiteNoise for static
-STORAGES = {
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
+
+IS_DEV = 'DEVELOPMENT' in os.environ
+
+if IS_DEV:
+    # local: filesystem media + whitenoise static
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+else:
+    # prod: Cloudinary media + whitenoise static
+    STORAGES = {
+        "default": {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
 }
 
 # When using Cloudinary, MEDIA_URL is not used for link building by the storage;
