@@ -70,7 +70,8 @@ INSTALLED_APPS = [
     'checkout',
 
     # Media storage
-    'storages'
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -197,38 +198,24 @@ else:
     DEFAULT_FROM_EMAIL = f"Besieged Studios <{EMAIL_HOST_USER}>"
 
 
-# AWS S3 Settings
-if os.environ.get('USE_AWS'):
-    INSTALLED_APPS += ['storages']
+# Django 5 storage config
+# Use Cloudinary for MEDIA only; WhiteNoise for static
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# When using Cloudinary, MEDIA_URL is not used for link building by the storage;
+# the storage returns full Cloudinary URLs. You can leave MEDIA_URL as-is.
+# No need to set DEFAULT_FILE_STORAGE in Django 5 when STORAGES is present.
 
-    AWS_QUERYSTRING_AUTH = False
-    AWS_DEFAULT_ACL = None
-    AWS_S3_FILE_OVERWRITE = False
-
-    AWS_LOCATION = 'media'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-
-    STORAGES = {
-        "default": {
-            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-        },
-        "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-        },
-    }
-else:
-    # Local/dev fallback
-    STORAGES = {
-        "default": {
-            "BACKEND": "django.core.files.storage.FileSystemStorage",
-        },
-        "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-        },
-    }
+# Optional: explicit creds (only needed if not using the single CLOUDINARY_URL var)
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+#     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+#     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+# }
