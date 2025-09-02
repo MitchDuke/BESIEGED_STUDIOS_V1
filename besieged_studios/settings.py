@@ -222,7 +222,7 @@ else:
         "staticfiles": {
             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         },
-}
+    }
 
 # When using Cloudinary, MEDIA_URL is not used for link building by the storage;
 # the storage returns full Cloudinary URLs. You can leave MEDIA_URL as-is.
