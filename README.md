@@ -144,6 +144,8 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
 
   - Admin Dashboard App:
     - Provides a management interface for the site owner.
+    - Allows gallery items to be added, edited or removed as required.
+    - Commissions can be viewed, approved and a quote price added for the customer to purchase using the checkout.
 
 ##  Technologies Used
 
@@ -162,6 +164,7 @@ Earn revenue by showcasing prior work, receiving commissions, and managing clien
   - [Allauth](https://django-allauth.readthedocs.io/)
   - [Whitenoise](http://whitenoise.evans.io/)
   - [Gunicorn](https://gunicorn.org/) – for Heroku
+  - [cloudinary](https://cloudinary.com/) - for media management
 
 ##  Testing
 
